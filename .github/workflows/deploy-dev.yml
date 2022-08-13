@@ -1,4 +1,4 @@
-name: Deploy avtoas
+name: Deploy dev
 
 on:
   push:
