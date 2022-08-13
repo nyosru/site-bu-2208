@@ -49,8 +49,7 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: 
-            - пулл в репу \n\r 11 /n/r 22 
-            - 👨🏻‍💻 User 333 ${{github.actor}} in ${{ github.repository }} repository. 
-            - Make ${{ github.event_name }}. Job ${{github.job}}.
+          args: пулл в репу \n\r 11 /n/r 22 <br/> 
+            👨🏻‍💻 User 333 ${{github.actor}} in ${{ github.repository }} repository. 
+            Make ${{ github.event_name }}. Job ${{github.job}}.
             
