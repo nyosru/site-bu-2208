@@ -47,10 +47,13 @@ jobs:
       - name: send telega
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
+          # to: ${{ secrets.TELEGRAM_TO }}
+          to:
+            - 360209578
+            - 5152088168
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            пулл в репу \n\r 11 /n/r 22 <br/> 
-            👨🏻‍💻 User 333 ${{github.actor}} in ${{ github.repository }} repository. 
+            +++ пулл в репу +++
+            👨🏻‍💻 User ${{github.actor}} in ${{ github.repository }} repository. 
             Make ${{ github.event_name }}. Job ${{github.job}}.
             
