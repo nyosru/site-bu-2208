@@ -48,7 +48,9 @@ jobs:
         uses: appleboy/telegram-action@master
         with:
           # to: ${{ secrets.TELEGRAM_TO }}
-          to: 360209578, 5152088168
+          to: 
+            360209578
+            5152088168
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             +++ пулл в репу +++
