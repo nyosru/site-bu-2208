@@ -43,3 +43,10 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: cd www && cd ${{ secrets.FOLDER }} && npm i && npm run prod
           # script: cd www && cd ${{ secrets.FOLDER }} && npm i && npm run dev
+
+      - name: send telega
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          args: 👨🏻‍💻 User ${{github.actor}} in ${{ github.repository }} repository. Make ${{ github.event_name }}. Job ${{github.job}}. commit sha: {{ commit.sha }}
