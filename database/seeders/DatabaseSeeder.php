@@ -4,6 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use Database\Seeders\CatSeeder;
+use Database\Seeders\GoodSeeder;
+use Database\Seeders\GoodImageSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,5 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        $this->call([
+            CatSeeder::class,
+            GoodSeeder::class,
+            GoodImageSeeder::class,
+        ]);
     }
 }

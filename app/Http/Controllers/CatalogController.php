@@ -2,98 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cr;
-use Illuminate\Http\Request;
+use App\Http\Resources\CatalogCollection;
 
-use App\Models\Cat;
-
+use App\Models\Catalog;
 
 class CatalogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+    /*
+     * список всех каталогов
      */
     public function index()
     {
-        $ar = [
-            'cats' => Cat::all()->toArray()
-        ];
-        // $ar['cats2'] = $ar['cats'];
-        return view('layouts.app',$ar);
+        return new CatalogCollection(
+            Catalog:: // remember(60)->
+                with('icon')->where('status', 'show')->orderBy('sort')->get()
+        );
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * показ одного каталога
      */
-    public function create()
+    public function show(string $id)
     {
-        //
-    }
-
-    public function getApiCats()
-    {
-        // return Cat::all()->toArray();
-        $data = Cat::all()->toArray();
-        return response()->json($data);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function show(cr $cr)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(cr $cr)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, cr $cr)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\cr  $cr
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(cr $cr)
-    {
-        //
+        return new CatalogCollection(Catalog::where('id', $id)->where('status', 'show')->get());
     }
 }
