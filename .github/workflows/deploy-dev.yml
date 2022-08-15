@@ -17,7 +17,13 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           # port: ${{ secrets.PORT }}
-          script: cd www && cd ${{ secrets.FOLDER }} && git config --global user.email "1@php-cat.com" && git config --global user.name "Sergey" && git fetch --all && git reset --hard origin/dev
+          script: |
+            cd www 
+            cd ${{ secrets.FOLDER_DEV }} 
+            git config --global user.email "1@php-cat.com" 
+            git config --global user.name "Sergey" 
+            git fetch --all 
+            git reset --hard origin/dev
           
       # - name: laravel migrate
       #   uses: appleboy/ssh-action@master
@@ -35,7 +41,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd www 
-            cd ${{ secrets.FOLDER }} 
+            cd ${{ secrets.FOLDER_DEV }} 
             /opt/php74/bin/php ./composer.phar i 
             /opt/php74/bin/php artisan migrate
             
@@ -46,17 +52,22 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: cd www && cd ${{ secrets.FOLDER }} && npm i && npm run prod
+          script: |
+            cd www
+            cd ${{ secrets.FOLDER_DEV }} 
+            npm i 
+            npm run dev
           # script: cd www && cd ${{ secrets.FOLDER }} && npm i && npm run dev
 
       - name: send telega
         uses: appleboy/telegram-action@master
         with:
           # to: ${{ secrets.TELEGRAM_TO }}
-          to: 360209578, phpcat, 5152088168, serhio
+          to: 360209578, phpcat, 
+          # 5152088168, serhio
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            +++ пулл в репу +++
+            +++ пулл в репу bu_dev +++
             👨🏻‍💻 ${{github.actor}} в репозиторий ${{ github.repository }}
             сделал ${{ github.event_name }}. задание ${{github.job}}.
             
