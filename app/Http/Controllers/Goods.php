@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class Goods extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
