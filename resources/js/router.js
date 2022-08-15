@@ -14,6 +14,7 @@ import CartComponent from './components/CartComponent.vue'
 import GoodComponent from './components/GoodComponent.vue'
 
 import IndexLineAdver from './components/IndexLineAdverComponent.vue'
+import AddGoodComponent from './components/AddGoodComponent.vue'
 
 const routes = [
 
@@ -44,6 +45,16 @@ const routes = [
         components: {
             BreadcrumbsComponent,
             page: PageComponent,
+        },
+    },
+
+    // текстовая страница
+    {
+        path: '/add',
+        name: 'add',
+        components: {
+            BreadcrumbsComponent,
+            page: AddGoodComponent,
         },
     },
 

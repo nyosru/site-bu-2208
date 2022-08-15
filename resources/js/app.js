@@ -4,6 +4,11 @@ import App from './components/App/AppComponent.vue'
 
 import router from './router'
 
+
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
+
+
 // createApp(App).mount("#app");
 const app = createApp(App)
 

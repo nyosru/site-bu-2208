@@ -2,7 +2,7 @@
   <div class="top-footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 col-xs-12 text-center">
+        <div class="col-md-3 col-12 mb-3 text-center">
           <div class="photo" xstyle="padding-top: 3rem;">
             <router-link :to="{ name: 'index' }">
               <!-- <img
@@ -15,7 +15,7 @@
             </router-link>
           </div>
         </div>
-        <div class="col-md-3 xhidden-xs xhidden-sm  xtext-center">
+        <div class="col-12 col-md-3 mb-3">
           <div class="widget-info">
             <ul>
               <!-- <li>
@@ -41,7 +41,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-md-4 pd-left xhidden-xs xhidden-sm  text-center">
+        <div class="col-12 col-md-4 mb-3 text-center">
           <span class="link_footer">
             <router-link
               v-for="u in link_footer"
@@ -78,7 +78,7 @@
           <br />
         </div>
 
-        <div class="col-md-2 col-xs-12 text-center">
+        <div class="col-md-2 col-12 text-center">
           <ul class="social">
             <a href="https://vk.com/avto_as" target="_blank" title="VK">
               <img
@@ -114,7 +114,7 @@
   <div class="copyright">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-12 col-sm-4 text-center">
+        <div class="col-12 col-sm-4 mb-3 text-center">
           <span>
             <a href="/" title="" style="color: #6c6c6c;">
               © 2008 - 2022
@@ -123,7 +123,7 @@
             </a>
           </span>
         </div>
-        <div class="col-xs-12 col-sm-4 text-center">
+        <div class="col-12 col-sm-4 mb-3 text-center">
           <img
             src="/storage/site/img/visa.png"
             alt="images"
@@ -136,7 +136,7 @@
             xclass="img-responsive"
           />
         </div>
-        <div class="col-xs-12 col-sm-4 text-center">
+        <div class="col-12 col-sm-4 mb-3 text-center">
           <span>
             <a
               href="//php-cat.com"

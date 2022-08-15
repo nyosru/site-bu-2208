@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Page;
-use Exception;
+// use Exception;
 
 class PageController extends Controller
 {

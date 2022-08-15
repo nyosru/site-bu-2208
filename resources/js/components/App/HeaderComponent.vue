@@ -87,6 +87,11 @@
                 <!-- <li class=""><a href="/50.posted/">Доставка</a></li> -->
                 <!-- <li class=""><a href="/contacts/">Контакты</a></li> -->
                 <li class="">
+                  <router-link :to="{ name: 'add' }" class="btn btn-warning">
+                    Добавить обьявление
+                  </router-link>
+                </li>
+                <li class="">
                   <router-link :to="{ name: 'page', params: { id: 'about' } }">
                     О компании
                   </router-link>

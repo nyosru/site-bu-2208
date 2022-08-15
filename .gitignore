@@ -22,5 +22,6 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
-public/
+/public/
 public/js/app.js
+/temp/
