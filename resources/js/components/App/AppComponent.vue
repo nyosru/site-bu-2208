@@ -1,18 +1,5 @@
 <template>
-  <!-- <br /> -->
-  <!-- <br /> -->
-
-  <!-- <router-link :to="{ name: 'index' }">index</router-link>    / -->
-  <!-- <router-link :to="{ name: 'cat', params: { cat_id: '111' } }">      Register    </router-link>    / -->
-  <!-- <router-link :to="'/cat/333'">Register2</router-link> -->
-  <!-- <br /> -->
-  <!-- {{ $route.params.cat_id ?? 'xx' }} -->
-  <!-- <br /> -->
-  <!-- <br /> -->
-
-  <header>
-    <header-component></header-component>
-  </header>
+  <header-tw-component></header-tw-component>
 
   <div class="content1">
     <router-view name="BreadcrumbsComponent" />
@@ -24,24 +11,25 @@
     <router-view name="vitrin" />
   </div>
 
-  <footer>
-    <footer-component></footer-component>
-  </footer>
+  <footer-tw-component></footer-tw-component>
 </template>
 
 <script setup>
-import HeaderComponent from './HeaderComponent.vue'
-import FooterComponent from './FooterComponent.vue'
+// import HeaderComponent from './HeaderComponent.vue'
+// import FooterComponent from './FooterComponent.vue'
 
-import cart from './../../use/cart.js'
+import HeaderTwComponent from './HeaderTwComponent.vue'
+import FooterTwComponent from './FooterTwComponent.vue'
 
-import { onMounted } from 'vue'
+// import cart from './../../use/cart.js'
 
-const { cartCashRead } = cart()
+// import { onMounted } from 'vue'
 
-onMounted(() => {
-  cartCashRead()
-})
+// const { cartCashRead } = cart()
+
+// onMounted(() => {
+//   cartCashRead()
+// })
 </script>
 
 <style scoped>

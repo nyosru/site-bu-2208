@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CatalogCollection;
 
-use App\Models\Catalog;
+use App\Models\Cat;
 
 class CatalogController extends Controller
 {
@@ -14,8 +14,15 @@ class CatalogController extends Controller
     public function index()
     {
         return new CatalogCollection(
-            Catalog:: // remember(60)->
-                with('icon')->where('status', 'show')->orderBy('sort')->get()
+            Cat:: 
+                // remember(60)->
+                // with('icon')->
+                // with('children')->
+                // with('cats')->
+                // where('status', 'show')->orderBy('sort')->
+                // whereNull('cat_up_id')->
+                // orderBy('sort')->
+                get()
         );
     }
 
@@ -24,6 +31,8 @@ class CatalogController extends Controller
      */
     public function show(string $id)
     {
-        return new CatalogCollection(Catalog::where('id', $id)->where('status', 'show')->get());
+        return new CatalogCollection(Cat::where('id', $id)->
+            // where('status', 'show')->
+            get());
     }
 }

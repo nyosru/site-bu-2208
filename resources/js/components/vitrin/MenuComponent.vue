@@ -1,0 +1,104 @@
+<template>
+  <div>
+    menu tpl
+    <!-- <br />
+    leftMenu : {{ leftMenu }}
+    <br />
+    <br />
+    route: {{ route }}
+    <br /> -->
+
+    <!-- allMenu: {{ allMenu.length }} -->
+    <!-- toLevelCatalogs: {{ toLevelCatalogs }} -->
+
+    <div v-for="v in leftMenu" :key="v.id">
+      <!-- v: {{ v }} -->
+
+      <router-link :to="'/cat/' + v.id" :class="{ 'bg-green-300' : route.params.cat_id == v.id }">
+        {{ v.name }}
+      </router-link>
+
+      <!-- <router-link :to="{ name: 'cat', params: { cat_id: v.id } }">
+        {{ v.name }}
+      </router-link> -->
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { watchEffect, ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import catalogs from './../../use/catalogs.js'
+
+const route = useRoute()
+// console.log(77, route)
+
+// catsLevelLower
+const {
+  loadData,
+  data: allMenu,
+  loading,
+  catsLevelLower,
+  leftMenu,
+} = catalogs()
+
+onMounted(() => {
+  loadData(
+    route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
+  )
+
+  // catsLevelLower(
+  //   route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
+  // )
+
+  // loadData(route.params.cat_id ?? 0 )
+  // catsLevelLower(route.params.cat_id ?? '')
+})
+
+// watch:{
+//   $route(to, from) {
+//      console.log(window.location.href);
+//      console.log(this.$route.path);
+//      console.log(this.$route.params);
+//   }
+// }
+
+watch(
+  // () => route.name,
+  () => route,
+  async (newId) => {
+    console.log(123123, route, newId)
+    // userData.value = await fetchUser(newId)
+  },
+)
+
+const stopWatch1 = watchEffect(() => {
+  // leftMenu.value = { 1: 2 }
+  if (loading.value == false && allMenu.value) {
+    // leftMenu.value = { 1: 3 }
+    // }
+    // if (loading.value == false && allMenu.value && allMenu.value.length ) {
+    // if (allMenu.value && allMenu.value.length ) {
+    console.log('watchEffect start 22 1')
+    catsLevelLower(
+      route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
+    )
+    console.log('22 2')
+  }
+})
+
+</script>
+
+<style scoped>
+.leftMenu a {
+  display: block;
+  padding-left: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  background-color: rgba(0, 0, 255, 0.1);
+  margin-bottom: 1px;
+}
+.leftMenu a:hover {
+  background-color: rgba(0, 0, 255, 0.2);
+}
+</style>

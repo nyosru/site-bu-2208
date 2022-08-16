@@ -5,16 +5,17 @@ import {
 } from 'vue-router'
 
 import BreadcrumbsComponent from './components/BreadcrumbsComponent.vue'
-import UpBannerComponent from './components/IndexUpBannersComponent.vue'
-import StarterComponent from './components/StarterComponent.vue'
-import VitrinComponent from './components/VitrinComponent.vue'
-import SearchComponent from './components/SearchComponent.vue'
-import PageComponent from './components/page/PageComponent.vue'
-import CartComponent from './components/CartComponent.vue'
-import GoodComponent from './components/GoodComponent.vue'
+// import UpBannerComponent from './components/IndexUpBannersComponent.vue'
+// import StarterComponent from './components/StarterComponent.vue'
+// import VitrinComponent from './components/VitrinComponent.vue'
+import VitrinComponent from './components/vitrin/Component.vue'
+// import SearchComponent from './components/SearchComponent.vue'
+import PageComponent from './components/page/Component.vue'
+import CartComponent from './components/Cart/Component.vue'
+// import GoodComponent from './components/GoodComponent.vue'
 
-import IndexLineAdver from './components/IndexLineAdverComponent.vue'
-import AddGoodComponent from './components/AddGoodComponent.vue'
+// import IndexLineAdver from './components/IndexLineAdverComponent.vue'
+// import AddGoodComponent from './components/AddGoodComponent.vue'
 
 const routes = [
 
@@ -28,13 +29,14 @@ const routes = [
         path: '/',
         name: 'index',
         components: {
-            // BreadcrumbsComponent
+            BreadcrumbsComponent,
             // adver: UpBannerComponent,
-            adverList: IndexLineAdver,
+            // adverList: IndexLineAdver,
             // starter: StarterComponent,
             // page: null,
             // cart: null,
             // vitrin: null,
+            vitrin: VitrinComponent,
         },
     },
 
@@ -54,39 +56,39 @@ const routes = [
         name: 'add',
         components: {
             BreadcrumbsComponent,
-            page: AddGoodComponent,
+            // page: AddGoodComponent,
         },
     },
 
-    // товар 1 показ
-    {
-        path: '/good/:good_id/:dop?',
-        name: 'good',
-        components: {
-            BreadcrumbsComponent,
-            vitrin: GoodComponent,
-        },
-    },
-    {
-        path: '/show/i/:good_id/:dop?',
-        name: 'good2',
-        components: {
-            BreadcrumbsComponent,
-            vitrin: GoodComponent,
-        },
-    },
+    // // товар 1 показ
+    // {
+    //     path: '/good/:good_id/:dop?',
+    //     name: 'good',
+    //     components: {
+    //         BreadcrumbsComponent,
+    //         vitrin: GoodComponent,
+    //     },
+    // },
+    // {
+    //     path: '/show/i/:good_id/:dop?',
+    //     name: 'good2',
+    //     components: {
+    //         BreadcrumbsComponent,
+    //         vitrin: GoodComponent,
+    //     },
+    // },
 
 
 
-    // search товаров
-    {
-        path: '/search/:search/:page?',
-        name: 'search',
-        components: {
-            BreadcrumbsComponent,
-            vitrin: SearchComponent,
-        },
-    },
+    // // search товаров
+    // {
+    //     path: '/search/:search/:page?',
+    //     name: 'search',
+    //     components: {
+    //         BreadcrumbsComponent,
+    //         vitrin: SearchComponent,
+    //     },
+    // },
 
 
 
@@ -99,14 +101,15 @@ const routes = [
             vitrin: VitrinComponent,
         },
     },
-    {
-        path: '/show/:cat_id/:page?',
-        name: 'cat2',
-        components: {
-            BreadcrumbsComponent,
-            vitrin: VitrinComponent,
-        },
-    },
+
+    // {
+    //     path: '/show/:cat_id/:page?',
+    //     name: 'cat2',
+    //     components: {
+    //         BreadcrumbsComponent,
+    //         vitrin: VitrinComponent,
+    //     },
+    // },
 
 
     // корзина товаров
@@ -135,9 +138,9 @@ const routes = [
         path: '/:catchAll(.*)*',
         name: 'NotFound',
         components: {
-            adver: UpBannerComponent,
+            // adver: UpBannerComponent,
             // starter: StarterComponent,
-            adverList: IndexLineAdver,
+            // adverList: IndexLineAdver,
         },
     },
 ]
@@ -145,7 +148,8 @@ const routes = [
 const router = new createRouter({
     // history: createWebHashHistory('/vue/'),
     history: createWebHistory(),
-    routes: routes,
+    // routes: routes,
+    routes,
     // scrollBehavior(to, from, savedPosition) {
     //     // always scroll to top
     //     return { top: 0 }
@@ -162,11 +166,12 @@ const router = new createRouter({
     }
 })
 
-// скрываем меню при любом переходе по ссылке
-import catalogs from './use/catalogs.ts'
-const { showMenu } = catalogs()
+// // скрываем меню при любом переходе по ссылке
+import catalogs from './use/catalogs.js'
+const { showMenu, catsLevelLower } = catalogs()
 router.afterEach((to, from) => {
-    showMenu.value = false
+    // showMenu.value = false
+    catsLevelLower()
 })
 
 export default router

@@ -1,46 +1,35 @@
 <template>
-  <div class="container" >
-    <div class="row">
-      <div class="col-xs-12">
-        <ul class="other-link-sub xpull-right">
-          <li>
+  <!-- <div class="container mx-auto"> -->
+  <!-- <nav      class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light" > -->
+  <!-- <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6" > -->
+  <!-- <nav class="bg-grey-light rounded-md w-full" aria-label="breadcrumb"> -->
+
+  <div class="container mx-auto">
+    <div
+      class="relative w-full pl-5 py-3 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light"
+    >
+      <ul class="other-link-sub xpull-right">
+        <li>
+          <router-link :to="{ name: 'index' }" title="">
+            Витрина
+          </router-link>
+        </li>
+
+        <template v-for="n in stepCrumb">
+          <li :key="n.id" v-if="n.name">
+            <span v-if="n.type == 'page'">{{ n.name }}</span>
             <router-link
-              :to="{ name: 'index' }"
-              title="Запчасти для автомобилей Авто-АС"
+              v-else
+              :to="{
+                name: n.type ?? 'cat',
+                params: { cat_id: n.id },
+              }"
             >
-              Авто-АС
+              {{ n.name }}
             </router-link>
           </li>
-
-          <!-- <li><a href="#home">Home</a></li> -->
-          <!-- <li><a class="active" href="#shop">Shop</a></li> -->
-
-          <!-- <li>{{ stepCrumb }}</li> -->
-          <!-- <li>{{ stepCrumb[0] }}</li> -->
-          <template v-for="n in stepCrumb">
-            <li :key="n.a_id" v-if="n.head">
-              <span v-if="n.type == 'page'">{{ n.head }}</span>
-              <router-link
-                v-else
-                :to="{
-                  name: n.type ?? 'cat',
-                  params: { cat_id: n.a_id },
-                }"
-              >
-                {{ n.head }}
-              </router-link>
-            </li>
-          </template>
-
-          <!-- <li v-if="c1.head"><a class="active" href="#shop">{{ c1.head }}</a></li> -->
-          <!-- <li>{{ stepCrumb[5] && stepCrumb[5][head] }}</li> -->
-          <!-- <li>{{ stepCrumb[4][head] ?? 'x4' }}</li> -->
-          <!-- <li>{{ stepCrumb[3][head] ?? 'x3' }}</li> -->
-          <!-- <li>{{ stepCrumb[2][head] ?? 'x2' }}</li> -->
-          <!-- <li>{{ stepCrumb[1][head] ?? 'x1' }}</li> -->
-          <!-- <li>{{ stepCrumb[0][head] ?? 'x0' }}</li> -->
-        </ul>
-      </div>
+        </template>
+      </ul>
     </div>
   </div>
 </template>
@@ -48,7 +37,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { ref, watchEffect } from 'vue'
-import catalogs from './../use/catalogs.ts'
+import catalogs from './../use/catalogs.js'
 
 const route = useRoute()
 const stepCrumb = ref([])
@@ -61,45 +50,29 @@ function getStepCats(cat_id) {
     // return [['name' > 'ppage'], []]
   } else {
     if (loading.value == false) {
-      const c1 = data.value.find((el) => el.a_id == cat_id)
+      const c1 = data.value.find((el) => el.id == cat_id)
       let c2 = []
       let c3 = []
       let c4 = []
       let c5 = []
 
-      // console.log( 11 , c1.a_parentid );
+      // console.log(11, c1.cat_up_id)
       // console.log( 11 , c1 , c1.value );
 
-      if (
-        c1.a_parentid &&
-        c1.a_parentid.length &&
-        c1.a_parentid != '00000126'
-      ) {
-        c2 = data.value.find((el) => el.a_id == c1.a_parentid)
-      }
+      if (c1.cat_up_id && c1.cat_up_id > 0) {
+        c2 = data.value.find((el) => el.id == c1.cat_up_id)
 
-      if (
-        c2.a_parentid &&
-        c2.a_parentid.length &&
-        c2.a_parentid != '00000126'
-      ) {
-        c3 = data.value.find((el) => el.a_id == c2.a_parentid)
-      }
+        if (c2.cat_up_id && c2.cat_up_id > 0) {
+          c3 = data.value.find((el) => el.id == c2.cat_up_id)
 
-      if (
-        c3.a_parentid &&
-        c3.a_parentid.length &&
-        c3.a_parentid != '00000126'
-      ) {
-        c4 = data.value.find((el) => el.a_id == c3.a_parentid)
-      }
+          if (c3.cat_up_id && c3.cat_up_id > 0) {
+            c4 = data.value.find((el) => el.id == c3.cat_up_id)
 
-      if (
-        c4.a_parentid &&
-        c4.a_parentid.length &&
-        c4.a_parentid != '00000126'
-      ) {
-        c5 = data.value.find((el) => el.a_id == c4.a_parentid)
+            if (c4.cat_up_id && c4.cat_up_id > 0) {
+              c5 = data.value.find((el) => el.id == c4.cat_up_id)
+            }
+          }
+        }
       }
 
       // console.log(
@@ -129,9 +102,8 @@ const { catNow } = catalogs()
 
 const nowPage = ref([])
 
-import page from './../use/page.ts'
+import page from './../use/page.js'
 const { whatThisPage } = page()
-
 
 const stopWatch = watchEffect(() => {
   // const { loading, data } = catalogs()
@@ -156,27 +128,24 @@ const stopWatch = watchEffect(() => {
   stepCrumb.value = []
 
   if (route.name == 'page') {
-
-  nowPage.value = whatThisPage(route.params.id)
+    nowPage.value = whatThisPage(route.params.id)
 
     // console.log({ type: 'page', head: route.params.id, a_id: route.params.id })
     stepCrumb.value.push({
       type: 'page',
       head: nowPage.value.head,
-      a_id: nowPage.value.a_id,
+      a_id: nowPage.value.id,
     })
     // console.log(stepCrumb.value)
-    window.scrollTo(0,0)
-  }else if (route.name == 'search') {
+    window.scrollTo(0, 0)
+  } else if (route.name == 'search') {
     stepCrumb.value.push({
       type: 'search',
       head: 'Поиск',
       a_id: 'x',
     })
-
-}else if (route.name == 'cart') {
-
-  nowPage.value = whatThisPage(route.params.id)
+  } else if (route.name == 'cart') {
+    nowPage.value = whatThisPage(route.params.id)
 
     // console.log({ type: 'page', head: route.params.id, a_id: route.params.id })
     stepCrumb.value.push({
@@ -185,7 +154,7 @@ const stopWatch = watchEffect(() => {
       a_id: 'x',
     })
     // console.log(stepCrumb.value)
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   } else if (catNow.value && catNow.value.length) {
     stepCrumb.value = getStepCats(catNow.value)
   }
@@ -198,5 +167,8 @@ const stopWatch = watchEffect(() => {
 </script>
 
 <style scoped>
-.container{ padding-top: 15px; padding-bottom: 25px;}
+.container {
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
 </style>

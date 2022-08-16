@@ -15,7 +15,7 @@ const cartAr = ref([])
 
 const setStandartGood = (good) => {
     if (good.OfferName && good.OfferName.length) {
-        good.id = good.OfferName
+        good.a_id = good.OfferName
     }
     if (good.ProductName && good.ProductName.length) {
         good.head = good.ProductName
@@ -24,30 +24,30 @@ const setStandartGood = (good) => {
         good.manufacturer = good.ManufacturerName
     }
     if (good.Price && (good.Price > 0 || good.Price.length)) {
-        good.price = good.Price
+        good.a_price = good.Price
     }
     return good
 }
 
 // const howNowId = (good) => {
-//     if (good.id && good.id.length) {
-//         return good.id
+//     if (good.a_id && good.a_id.length) {
+//         return good.a_id
 //     } else if (good.OfferName && good.OfferName.length) {
 //         return good.OfferName
 //     }
 // }
 
 const cartAdd = (good, kolvo = 1) => {
-    // let nom = (good.id && good.id.length) ? good.id : good.Reference
+    // let nom = (good.a_id && good.a_id.length) ? good.a_id : good.Reference
     // let nom = howNowId(good)
 
     good = setStandartGood(good)
 
-    let findIndex = cartAr.value.findIndex((o) => o.id === good.id)
+    let findIndex = cartAr.value.findIndex((o) => o.a_id === good.a_id)
 
     if (findIndex === -1) {
         // cartAr.value.findIndex((o) => {
-        //     if (o.id === good.id) {
+        //     if (o.a_id === good.a_id) {
         //         console.log(o)
         //     }
         // })
@@ -63,13 +63,13 @@ const cartAdd = (good, kolvo = 1) => {
         cartAr.value[findIndex]['kolvo'] = cartAr.value[findIndex]['kolvo'] + kolvo
     }
 
-    // // if ( good.id && cartAr.value[good.id] && cartAr.value[good.id] > 0 ) {
-    // //   cartAr.value[good.id] = cartAr.value[good.id] + kolvo
+    // // if ( good.a_id && cartAr.value[good.a_id] && cartAr.value[good.a_id] > 0 ) {
+    // //   cartAr.value[good.a_id] = cartAr.value[good.a_id] + kolvo
     // // } else {
-    // //   cartAr.value[good.id] = kolvo
+    // //   cartAr.value[good.a_id] = kolvo
     // // }
 
-    // cartArGoods.value[good.id] = good
+    // cartArGoods.value[good.a_id] = good
 
     // console.log(11, cartAr.value, cartArGoods.value )
 
@@ -77,14 +77,14 @@ const cartAdd = (good, kolvo = 1) => {
 }
 
 const cartMinus = (good, kolvo = 1) => {
-    // let a = cartAr.value[good.id] - kolvo
-    // cartAr.value[good.id] = a >= 0 ? a : 0
+    // let a = cartAr.value[good.a_id] - kolvo
+    // cartAr.value[good.a_id] = a >= 0 ? a : 0
 
-    let findIndex = cartAr.value.findIndex((o) => o.id === good.id)
+    let findIndex = cartAr.value.findIndex((o) => o.a_id === good.a_id)
 
     if (findIndex === -1) {
         // cartAr.value.findIndex((o) => {
-        //     if (o.id === good.id) {
+        //     if (o.a_id === good.a_id) {
         //         console.log(o)
         //     }
         // })
@@ -119,7 +119,7 @@ const cartRemove = (id) => {
     // cartAr.value.forEach(){}
     // cartAr.value.filter(e => e.population < 1000000)
 
-    let index = cartAr.value.findIndex((e) => e.id === id)
+    let index = cartAr.value.findIndex((e) => e.a_id === id)
     if (index !== -1) {
         // console.log(331, cartAr.value[index])
         cartAr.value.splice(index, 1)
@@ -148,7 +148,7 @@ const cartCashRead = () => {
 
 const goodInCart = (id_str) => {
     // return cartAr.value[id_str] && cartAr.value[id_str] > 0
-    let findIndex = cartAr.value.findIndex((o) => o.id === id_str)
+    let findIndex = cartAr.value.findIndex((o) => o.a_id === id_str)
         // let findIndex2 = cartAr.value.findIndex((o) => o.Reference === id_str)
         // return findIndex === -1 ? (findIndex2 === -1 ? false : true) : true
     return findIndex === -1 ? false : true

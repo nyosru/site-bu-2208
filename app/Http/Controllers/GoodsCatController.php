@@ -45,26 +45,29 @@ class GoodsCatController extends Controller
         // $ids = [1, 2, 3, '00000071', 'ЦБ002029'];
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->get());
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->simplePaginate(10));
-        return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->paginate(50));
+        // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->paginate(50));
+        return new GoodCollection(Good::whereIn('cat_id', $ids)->
+        // where('status', 'show')->
+        paginate(50));
     }
 
     /**
-     * возвращает массив a_id текущий каталог и все вложенные
+     * возвращает массив id текущий каталог и все вложенные
      */
     public static function getCatsInner($id_cat)
     {
         // $ids = [ 1 , 2 , 3 , '00000071', 'ЦБ002029' ];
         // return new GoodCollection(Good::whereIn('a_categoryid',$ids)->where('status', 'show')->get());
-        $a = DB::table('mod_020_cats as m')
-            ->addSelect('m.a_id')
-            ->where('m.a_parentid', $id_cat)
+        $a = DB::table('cats as m')
+            ->addSelect('m.id')
+            ->where('m.cat_up_id', $id_cat)
             // ->whereIn('id', [1, 2, 3])
             // ->get()
         ;
-        $a1 = DB::table('mod_020_cats as m')
-            ->join('mod_020_cats as m2', 'm2.a_parentid', '=', 'm.a_id')
-            ->addSelect('m2.a_id')
-            ->where('m.a_parentid', $id_cat)
+        $a1 = DB::table('cats as m')
+            ->join('cats as m2', 'm2.cat_up_id', '=', 'm.id')
+            ->addSelect('m2.id')
+            ->where('m.cat_up_id', $id_cat)
             // ->whereIn('id', [1, 2, 3])
             // ->union($a)
             // ->get()
@@ -72,34 +75,34 @@ class GoodsCatController extends Controller
 
             $a = $a->union($a1);
 
-        $a2 = DB::table('mod_020_cats as m')
-            ->join('mod_020_cats as m2', 'm2.a_parentid', '=', 'm.a_id')
-            ->join('mod_020_cats as m3', 'm3.a_parentid', '=', 'm2.a_id')
-            ->addSelect('m3.a_id')
-            ->where('m.a_parentid', $id_cat)
+        $a2 = DB::table('cats as m')
+            ->join('cats as m2', 'm2.cat_up_id', '=', 'm.id')
+            ->join('cats as m3', 'm3.cat_up_id', '=', 'm2.id')
+            ->addSelect('m3.id')
+            ->where('m.cat_up_id', $id_cat)
             // ->whereIn('id', [1, 2, 3])
             // ->union($a1)
             // ->get()
             ;
             $a = $a->union($a2);
-        $a3 = DB::table('mod_020_cats as m')
-            ->join('mod_020_cats as m2', 'm2.a_parentid', '=', 'm.a_id')
-            ->join('mod_020_cats as m3', 'm3.a_parentid', '=', 'm2.a_id')
-            ->join('mod_020_cats as m4', 'm4.a_parentid', '=', 'm3.a_id')
-            ->addSelect('m4.a_id')
-            ->where('m.a_parentid', $id_cat)
+        $a3 = DB::table('cats as m')
+            ->join('cats as m2', 'm2.cat_up_id', '=', 'm.id')
+            ->join('cats as m3', 'm3.cat_up_id', '=', 'm2.id')
+            ->join('cats as m4', 'm4.cat_up_id', '=', 'm3.id')
+            ->addSelect('m4.id')
+            ->where('m.cat_up_id', $id_cat)
             // ->whereIn('id', [1, 2, 3])
             // ->union($a2)
             // ->get()
             ;
             $a = $a->union($a3);
-        $a4 = DB::table('mod_020_cats as m')
-            ->join('mod_020_cats as m2', 'm2.a_parentid', '=', 'm.a_id')
-            ->join('mod_020_cats as m3', 'm3.a_parentid', '=', 'm2.a_id')
-            ->join('mod_020_cats as m4', 'm4.a_parentid', '=', 'm3.a_id')
-            ->join('mod_020_cats as m5', 'm5.a_parentid', '=', 'm4.a_id')
-            ->addSelect('m5.a_id')
-            ->where('m.a_parentid', $id_cat)
+        $a4 = DB::table('cats as m')
+            ->join('cats as m2', 'm2.cat_up_id', '=', 'm.id')
+            ->join('cats as m3', 'm3.cat_up_id', '=', 'm2.id')
+            ->join('cats as m4', 'm4.cat_up_id', '=', 'm3.id')
+            ->join('cats as m5', 'm5.cat_up_id', '=', 'm4.id')
+            ->addSelect('m5.id')
+            ->where('m.cat_up_id', $id_cat)
             // ->whereIn('id', [1, 2, 3])
             // ->union($a3)
             // ->get()
@@ -112,7 +115,7 @@ class GoodsCatController extends Controller
         // foreach( $a4 as $k ){
         foreach( $aaa as $k ){
             // dd($k);
-            $r[] = $k->a_id;
+            $r[] = $k->id;
         }
         return $r;
     }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head>
+<head class="scroll-smooth" >
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="{{ asset('storage/css/style.css') }}?s=2208120328" />
     {{-- <link rel="icon" type="image/png" href="/storage/site/img/logo47.png" /> --}}
+
+    {{-- @vite('resources/css/app.css') --}}
 
     {{-- <meta property="og:title" content="Авто-АС запчасти"> --}}
     {{-- <meta property="og:site_name" content="avto-as.ru"> --}}
