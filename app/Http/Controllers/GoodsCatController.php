@@ -46,7 +46,7 @@ class GoodsCatController extends Controller
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->get());
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->simplePaginate(10));
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->paginate(50));
-        return new GoodCollection(Good::whereIn('cat_id', $ids)->
+        return new GoodCollection(Good::with('image')->whereIn('cat_id', $ids)->
         // where('status', 'show')->
         paginate(50));
     }

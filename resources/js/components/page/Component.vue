@@ -19,11 +19,34 @@
           <div class="col-12 text-center">
             .. загружаю данные ..
             <br />
-            <img
+            <!-- <img
               src="/storage/site/img/loader.gif"
               alt=""
               style="width: 120px;"
-            />
+            /> -->
+
+
+
+
+
+
+<div class="flex justify-center items-center space-x-2">
+  <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
           </div>
         </div>
         <div class="row" v-else-if="pageError">

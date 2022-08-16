@@ -15,7 +15,7 @@ class Good extends Model
      /**
      * Получить комментарии к посту блога.
      */
-    public function images()
+    public function image()
     {
         return $this->hasMany(GoodImage::class, 'good_id' , 'id' );
     }

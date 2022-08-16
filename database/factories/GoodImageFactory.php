@@ -15,8 +15,8 @@ class GoodImageFactory extends Factory
     {
         
         $in = [
-            'name' => 'http://placeimg.com/'.rand(640,960).'/'.rand(240,480).'/any',
-            'good_id' => rand(1,10000),
+            'uri' => 'http://placeimg.com/'.rand(640,960).'/'.rand(240,480).'/any',
+            'good_id' => rand(1,1000),
         ];
 
         if (rand(1, 10) == 2)

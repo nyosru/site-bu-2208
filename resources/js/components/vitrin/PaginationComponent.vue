@@ -1,60 +1,70 @@
 <template>
-  <div class="container-fluid text-center" v-if="inf && inf.links">
-    <!-- pagination
-    <Br />
-    <Br /> -->
-
-    <!-- <div class="product-pagination"> -->
-    <ul class="pagination">
-      <!-- <li><a href="#" >Страницы:</a></li> -->
-      <!-- <li>
-          <a href="#"><i class="ion-chevron-left"></i></a>
-        </li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">...</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-          <a href="#"><i class="ion-chevron-right"></i></a>
-        </li> -->
-
-      <template v-for="li in inf.links" :key="li.label">
-        <li
-          v-if="(li.label > 0 && li.label < 999) || li.label == '...'"
-          :class="{ active: li.active === true }"
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <div
+    v-if="inf && inf.links"
+    class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+  >
+    <div class="flex-1 flex justify-between sm:hidden">
+      <a
+        href="#"
+        class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+      >
+        Previous
+      </a>
+      <a
+        href="#"
+        class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+      >
+        Next
+      </a>
+    </div>
+    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+      <div>
+        <!-- <p class="text-sm text-gray-700">
+          Showing
+          <span class="font-medium">1</span>
+          to
+          <span class="font-medium">10</span>
+          of
+          <span class="font-medium">97</span>
+          results
+        </p> -->
+      </div>
+      <div>
+        <nav
+          class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+          aria-label="Pagination"
         >
-          <a v-if="li.label === '...'">...</a>
-          <router-link
-            v-else-if="li.label > 0 && li.label < 999"
-            :to="{
-              name: 'cat',
-              params: {
-                cat_id: cat_id_now,
-                page: li.label != 1 ? li.label : '',
-              },
-            }"
-          >
-            {{ li.label }}
-          </router-link>
-        </li>
-      </template>
-    </ul>
-    <!-- </div>
+          <template v-for="li in inf.links" :key="li.label">
+            <span
+              v-if="li.label === '...'"
+              class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+            >
+              ...
+            </span>
 
-    <Br />
-    <Br /> -->
-
-    <!-- <router-link v-for="li in inf.links" :key="li.label" >{{ li.label }}</router-link> -->
-
-    <!-- <Br />
-    <Br />
-    inf.links {{ inf.links }} -->
+            <router-link
+              v-else-if="li.label > 0 && li.label < 999"
+              :to="{
+                name: 'cat',
+                params: {
+                  cat_id: cat_id_now,
+                  page: li.label != 1 ? li.label : '',
+                },
+              }"
+              class="hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
+              :class="{
+                'bg-blue-300 hover:bg-blue-400 text-gray-800 hover:text-gray-900': li.active === true,
+                'bg-white hover:bg-gray-50 text-gray-500 hover:text-gray-700 border-gray-300': li.active !== true,
+              }"
+            >
+              {{ li.label }}
+            </router-link>
+          </template>
+        </nav>
+      </div>
+    </div>
   </div>
-  <!-- <div class="ff" v-else>
-    111
-  </div> -->
-  <!-- <div>inf {{ inf }}</div> -->
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    menu tpl
+  <div v-if="leftMenu && leftMenu.length" class="text-center mb-5">
+    <!-- menu tpl -->
     <!-- <br />
     leftMenu : {{ leftMenu }}
     <br />
@@ -11,17 +11,21 @@
     <!-- allMenu: {{ allMenu.length }} -->
     <!-- toLevelCatalogs: {{ toLevelCatalogs }} -->
 
-    <div v-for="v in leftMenu" :key="v.id">
+    <template v-for="v in leftMenu" :key="v.id">
       <!-- v: {{ v }} -->
 
-      <router-link :to="'/cat/' + v.id" :class="{ 'bg-green-300' : route.params.cat_id == v.id }">
+      <router-link
+        :to="'/cat/' + v.id"
+        class="text-base mr-3 px-2 py-1"
+        :class="{ 'bg-green-300': route.params.cat_id == v.id }"
+      >
         {{ v.name }}
       </router-link>
 
       <!-- <router-link :to="{ name: 'cat', params: { cat_id: v.id } }">
         {{ v.name }}
       </router-link> -->
-    </div>
+    </template>
   </div>
 </template>
 
@@ -86,7 +90,6 @@ const stopWatch1 = watchEffect(() => {
     console.log('22 2')
   }
 })
-
 </script>
 
 <style scoped>

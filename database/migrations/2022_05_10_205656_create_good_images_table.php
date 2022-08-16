@@ -15,7 +15,7 @@ class CreateGoodImagesTable extends Migration
     {
         Schema::create('good_images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('uri');
             $table->integer('good_id');
             $table->enum('start', ['y'])
                 ->nullable();
