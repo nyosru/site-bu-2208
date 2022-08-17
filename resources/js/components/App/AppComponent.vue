@@ -15,7 +15,6 @@
     <router-view name="vitrin" />
   </div>
 
-222
 
   <footer-tw-component></footer-tw-component>
 </template>
