@@ -1,20 +1,12 @@
 <template>
+
+<!-- <div>
+  leftMenu: {{ leftMenu }}
+</div> -->
+
   <div v-if="leftMenu && leftMenu.length" class="row">
-    <div class="text-center mb-5 leading-6">
-      <!-- menu tpl -->
-      <!-- <br />
-    leftMenu : {{ leftMenu }}
-    <br />
-    <br />
-    route: {{ route }}
-    <br /> -->
-
-      <!-- allMenu: {{ allMenu.length }} -->
-      <!-- toLevelCatalogs: {{ toLevelCatalogs }} -->
-
+    <div class="text-center mb-5 leading-8">
       <template v-for="v in leftMenu" :key="v.id">
-        <!-- v: {{ v }} -->
-
         <router-link
           :to="'/cat/' + v.id"
           class="text-base mr-3 px-2 py-1 whitespace-nowrap"
@@ -23,17 +15,13 @@
           {{ v.name }}
         </router-link>
         &nbsp;
-
-        <!-- <router-link :to="{ name: 'cat', params: { cat_id: v.id } }">
-        {{ v.name }}
-      </router-link> -->
       </template>
     </div>
   </div>
 </template>
 
 <script setup>
-import { watchEffect, ref, onMounted, watch } from 'vue'
+// import { watchEffect, ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import catalogs from './../../use/catalogs.js'
 
@@ -42,25 +30,35 @@ const route = useRoute()
 
 // catsLevelLower
 const {
-  loadData,
-  data: allMenu,
-  loading,
-  catsLevelLower,
+  // loadData,
+  // data: allMenu,
+  // loading,
+  // catsLevelLower,
+  // catsLevelLowerStart,
   leftMenu,
 } = catalogs()
 
-onMounted(() => {
-  loadData(
-    route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
-  )
+// onMounted( () => {
+// console.log(99 , route.name);
+//   if( route.name == 'index' ){
+//     console.log(888);
+//    loadData(
+//   0
+//   )
+//   catsLevelLowerStart()
+//   }else{
+//   loadData(
+//     route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
+//   )
+//   }
 
-  // catsLevelLower(
-  //   route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
-  // )
+//   catsLevelLower(
+//     route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
+//   )
 
-  // loadData(route.params.cat_id ?? 0 )
-  // catsLevelLower(route.params.cat_id ?? '')
-})
+//   loadData(route.params.cat_id ?? 0 )
+//   catsLevelLower(route.params.cat_id ?? '')
+// })
 
 // watch:{
 //   $route(to, from) {
@@ -70,29 +68,39 @@ onMounted(() => {
 //   }
 // }
 
-watch(
-  // () => route.name,
-  () => route,
-  async (newId) => {
-    console.log(123123, route, newId)
-    // userData.value = await fetchUser(newId)
-  },
-)
+// watch(
+//   // () => route.name,
+//   () => route,
+//   async (newId) => {
+//     console.log(123123, route, newId)
+//     // userData.value = await fetchUser(newId)
+//   },
+// )
 
-const stopWatch1 = watchEffect(() => {
-  // leftMenu.value = { 1: 2 }
-  if (loading.value == false && allMenu.value) {
-    // leftMenu.value = { 1: 3 }
-    // }
-    // if (loading.value == false && allMenu.value && allMenu.value.length ) {
-    // if (allMenu.value && allMenu.value.length ) {
-    console.log('watchEffect start 22 1')
-    catsLevelLower(
-      route.params.cat_id && route.params.cat_id > 0 ? route.params.cat_id : 0,
-    )
-    console.log('22 2')
-  }
-})
+// const stopWatch1 = watchEffect(() => {
+//   // leftMenu.value = { 1: 2 }
+//   if (loading.value == false && allMenu.value) {
+//     // leftMenu.value = { 1: 3 }
+//     // }
+//     // if (loading.value == false && allMenu.value && allMenu.value.length ) {
+//     // if (allMenu.value && allMenu.value.length ) {
+//     console.log('watchEffect start calc menu dop')
+//     if (route.name == 'index') {
+//       console.log('00 start');
+//       catsLevelLowerStart()
+//     } else {
+//       console.log('00 11 start');
+//       catsLevelLower(
+//         route.params.cat_id && route.params.cat_id > 0
+//           ? route.params.cat_id
+//           : 0,
+//       )
+//     }
+//     console.log('watchEffect fin')
+//   }
+// })
+
+
 </script>
 
 <style scoped>

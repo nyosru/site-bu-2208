@@ -69,8 +69,11 @@ const pageLoad = async(page_id) => {
         })
 }
 
+const nowPage = ref([])
+
 export default function page() {
     return {
+        nowPage,
         pageList,
         whatThisPage,
         pageData,

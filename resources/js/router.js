@@ -9,6 +9,7 @@ import BreadcrumbsComponent from './components/BreadcrumbsComponent.vue'
 // import StarterComponent from './components/StarterComponent.vue'
 // import VitrinComponent from './components/VitrinComponent.vue'
 import VitrinComponent from './components/vitrin/Component.vue'
+import MenuComponent from './components/vitrin/MenuComponent.vue'
 // import SearchComponent from './components/SearchComponent.vue'
 import PageComponent from './components/page/Component.vue'
 import CartComponent from './components/Cart/Component.vue'
@@ -18,7 +19,6 @@ import CartComponent from './components/Cart/Component.vue'
 // import AddGoodComponent from './components/AddGoodComponent.vue'
 
 const routes = [
-
     // {
     //     path: '/',
     //     component: () =>
@@ -30,13 +30,14 @@ const routes = [
         name: 'index',
         components: {
             BreadcrumbsComponent,
+            MenuComponent,
             // adver: UpBannerComponent,
             // adverList: IndexLineAdver,
             // starter: StarterComponent,
             // page: null,
             // cart: null,
             // vitrin: null,
-            vitrin: VitrinComponent,
+            // vitrin: VitrinComponent,
         },
     },
 
@@ -78,8 +79,6 @@ const routes = [
     //     },
     // },
 
-
-
     // // search товаров
     // {
     //     path: '/search/:search/:page?',
@@ -90,14 +89,13 @@ const routes = [
     //     },
     // },
 
-
-
     // каталог товаров
     {
         path: '/cat/:cat_id/:page?',
         name: 'cat',
         components: {
             BreadcrumbsComponent,
+            MenuComponent,
             vitrin: VitrinComponent,
         },
     },
@@ -110,7 +108,6 @@ const routes = [
     //         vitrin: VitrinComponent,
     //     },
     // },
-
 
     // корзина товаров
     {
@@ -130,8 +127,8 @@ const routes = [
             vitrin: CartComponent,
         },
         props: {
-            orderGood: true
-        }
+            orderGood: true,
+        },
     },
     // если не сработал ни один роут, показываем первую страничку
     {
@@ -161,17 +158,49 @@ const router = new createRouter({
                 behavior: 'smooth',
             }
         } else {
-            return { top: 0, behavior: 'smooth', }
+            return { top: 0, behavior: 'smooth' }
         }
-    }
+    },
 })
 
 // // скрываем меню при любом переходе по ссылке
 import catalogs from './use/catalogs.js'
-const { showMenu, catsLevelLower } = catalogs()
+const {
+    // showMenu,
+    catsLevelLower,
+    catsLevelLowerStart,
+} = catalogs()
 router.afterEach((to, from) => {
+    // console.log('router.afterEach((to, from) => {')
+    // console.log(
+    //         'from', from,
+    //         'to',
+    //         to,
+    //     )
+    //   console.log(1122)
     // showMenu.value = false
-    catsLevelLower()
+
+    if (to.name == 'index') {
+        //     // console.log('001')
+        //     // @click="catNow='';stepCrumb={}"
+        catsLevelLowerStart()
+    } else {
+        let cat_id = to.params.cat_id ? to.params.cat_id : 0
+            // console.log('002', 'cat_id = ', cat_id)
+        catsLevelLower(cat_id)
+    }
+
+    // if (route.name == 'index') {
+    //       console.log('00 start');
+    //       catsLevelLowerStart()
+    //     } else {
+    //       console.log('00 11 start');
+    //       catsLevelLower(
+    //         route.params.cat_id && route.params.cat_id > 0
+    //           ? route.params.cat_id
+    //           : 0,
+    //       )
+    //     }
 })
 
 export default router

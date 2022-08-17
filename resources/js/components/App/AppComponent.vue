@@ -1,8 +1,12 @@
 <template>
   <header-tw-component></header-tw-component>
 
+  <!-- route: {{ $route }} -->
+
   <div class="content1">
     <router-view name="BreadcrumbsComponent" />
+    <router-view name="MenuComponent" />
+
     <router-view name="adver" />
     <router-view name="adverList" />
     <router-view name="starter" />
@@ -15,21 +19,8 @@
 </template>
 
 <script setup>
-// import HeaderComponent from './HeaderComponent.vue'
-// import FooterComponent from './FooterComponent.vue'
-
 import HeaderTwComponent from './HeaderTwComponent.vue'
 import FooterTwComponent from './FooterTwComponent.vue'
-
-// import cart from './../../use/cart.js'
-
-// import { onMounted } from 'vue'
-
-// const { cartCashRead } = cart()
-
-// onMounted(() => {
-//   cartCashRead()
-// })
 </script>
 
 <style scoped>

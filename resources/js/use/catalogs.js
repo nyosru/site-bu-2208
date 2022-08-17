@@ -1,27 +1,14 @@
-import {
-    ref,
-    // reactive, toRefs, readonly,
-    // watch,
-    // computed
-} from 'vue'
+import { ref } from 'vue'
 
 import axios from 'axios'
 
 // import { useRoute } from 'vue-router'
 // const route = useRoute()
-// console.log(1177, route)
-// console.log(1177, $route)
 
-// конфиг загружаемой инфы
-// const cfg = ref({})
 // данные что загрузил
 const data = ref([])
-    // отфильтрованный список
-    // const data_filtered = ref({})
     // загрузка идёт или нет
 const loading = ref(true)
-    // какой модуль сейчас загружен
-    // const loading_module_now = ref('')
 
 // тащим все вложенные каталоги в указанный
 const catsInner = (parent_id) => {
@@ -36,15 +23,31 @@ const leftMenu = ref([])
  * тащим все вложенные каталоги в указанный
  */
 const catsLevelLower = (id = '') => {
-    console.log('catsLevelLower start', id, leftMenu.value)
-
     const res = data.value.filter(function(e) {
         return e.cat_up_id == id
     })
 
     if (res.length) {
         leftMenu.value = res
-        console.log('catsLevelLower fin', id, leftMenu.value)
+    }
+}
+
+const catsLevelLowerStart = () => {
+    // console.log('catsLevelLowerStart' , data.value)
+
+    if (data.value.length == 0) {
+        loadData()
+    }
+
+    if (data.value.length > 0) {
+        const res = data.value.filter(function(e) {
+            return !e.cat_up_id
+        })
+
+        if (res.length) {
+            leftMenu.value = res
+                // console.log('catsLevelLowerStart 00 fin', 'результатов:', res.length)
+        }
     }
 }
 
@@ -54,35 +57,8 @@ const showMenu = ref(false)
 // каталог сейчас (для крошек)
 const catNow = ref('')
 
-// const loadData = (module, db_connection = 'out') => {
 const loadData = async(cat_id = null) => {
-    console.log('modules menu load = loadData()', cat_id)
-        // if (loading_module_now.value != module) {
-
-    //     loading_module_now.value = module;
-
-    //     console.log('mod didrive items datas', 'loadData', 'грузим данные');
-
-    //     // ставим что первая страница
-    //     const { setPage } = pages();
-    //     setPage(1);
-
-    //     // const {
-    //     //     items_data,
-    //     //     items_cfg,
-    //     //     items_loading
-    //     //     // items_loading_module ,
-    //     //     // items_now_loading
-    //     // } = items();
-    //     // const route = useRoute();
-
-    //     // console.log("грузим 2");
-
-    //     data.value = {};
-    //     cfg.value = {};
-    //     loading.value = true;
-
-    //     //         // console.log( 'new_status' , new_status);
+    // console.log('modules menu load = loadData()', cat_id)
 
     let d = new Date()
     const now_d = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate()
@@ -97,105 +73,44 @@ const loadData = async(cat_id = null) => {
         loading.value = false
 
         // console.log('cash 77',localStorage.cats)
-        console.log('cat', 'cash 77')
-            // leftMenu.value = { 11: 77 }
-            // catsLevelLower()
+        // console.log('cat', 'cash 77')
         catsLevelLower(cat_id > 0 ? cat_id : null)
-        console.log('cat', 'cash 77 2')
+            // console.log('cat', 'cash 77 2')
     } else {
         localStorage.cats_date = now_d
         await axios
             .get('/api/catalog')
             .then((response) => {
-                // console.log("get_datar", response.data);
-                // items_loading_module.value = items_now_loading.value;
-
-                // data_filtered.value =
                 data.value = response.data.data
                 localStorage.cats = JSON.stringify(response.data.data)
-                    // cfg.value = response.data.cfg;
                 loading.value = false
-                    // return response.data;
-                    // items_loading.value = dfalse
-
-                // leftMenu.value = { 11: 77 }
-                // catsLevelLower()
                 catsLevelLower(cat_id > 0 ? cat_id : null)
             })
             .catch((error) => {
-                console.log(error)
-                    // this.errored = true;
+                // console.log(error)
+                // this.errored = true;
             })
     }
-
-    //         this.itemStatus0 = new_status;
-
-    // } else {
-    //     // console.log('modules items getItemsAll', 'не грузим данные, уже есть');
-    // }
-
-    // return items_data.value ?? 'x'
 }
 
-// const { showStatusDelete } = filterSettings();
-// const { now_page } = pages();
 
-// watch([showStatusDelete, now_page, loading], (newValues, prevValues) => {
+const stepCrumb = ref([])
 
-//     const { now_page, onPage, kolvo } = pages();
-
-//     if (newValues[0] !== prevValues[0])
-//         now_page.value = 1;
-
-//     // console.log('watch', newValues, prevValues)
-//     // console.log('watch', newValues[0], prevValues[0])
-//     //   const { items_data, items_filtered } = items();
-//     // console.log("фльтр data", data.value);
-
-//     if (data.value && data.value.length > 0) {
-
-//         // const { showStatusDelete } = filterSettings();
-//         // console.log("фльтру delete = ", showStatusDelete.value);
-
-//             const items_filtered = data.value.filter(el => {
-
-//                 if (el.status == "delete" && showStatusDelete.value == false) {
-//                     return false;
-//                 }
-
-//                 return true;
-//             });
-//         // console.log("отфильтровали массив по фльтру ", items_filtered);
-
-//         let start = 0;
-//         let fin = 0;
-
-//         kolvo.value = items_filtered.length;
-
-//         if (now_page.value == 1) {
-//             start = 0;
-//             fin = onPage.value - 1;
-//         } else {
-//             start = (now_page.value - 1) * onPage.value;
-//             fin = start + onPage.value - 1;
-//         }
-
-//         // console.log("показываем из массива ", start, fin);
-
-//         data_filtered.value = {};
-
-//         // let result = items_data2.slice(start, fin);
-//         data_filtered.value = items_filtered.slice(start, fin);
-
-//         // return result;
-//     } else {
-//         data_filtered.value = {};
-//     }
-
-// });
+// const goToIndex = () => {
+//   console.log('const goToIndex')
+//   stepCrumb.value = []
+//   catNow.value = ''
+//   // catsLevelLowerStart()
+//   // catsLevelLower('')
+// }
 
 export default function catalogs() {
     return {
+        catNow,
+        // goToIndex,
+        // список шагов для хлебных крошек
+        stepCrumb,
+
         // конфиг загружаемой инфы
         // cfg,
         // данные что загрузил
@@ -218,6 +133,7 @@ export default function catalogs() {
         // тащим все вложенные каталоги в указанный
         // catsLevelLower(id)
         catsLevelLower,
+        catsLevelLowerStart,
         // левое меню
         leftMenu,
         //

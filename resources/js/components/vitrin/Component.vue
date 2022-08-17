@@ -1,30 +1,5 @@
 <template>
   <div class="container-fluid">
-    <!-- <div class="row">
-      <div class="col-xs-12 py-4">
-        <h3>vitrin mitrin</h3>
-      </div>
-    </div> -->
-
-    <!-- <div class="row" v-if="false">
-      <div class="col-12 text-center">
-        <template
-          v-if="
-            !goodsLoading &&
-            goodsData.meta &&
-            goodsData.meta.links &&
-            goodsData.meta.links.length > 3
-          "
-        ></template>
-        <template v-else>
-        </template>
-      </div>
-    </div> -->
-    <!-- <div
-      class="row xproduct-list xgrid_full xgrid_sidebar xgrid-uniform xcontainer-fluid"
-    > -->
-      <vitrin-menu-component-vue></vitrin-menu-component-vue>
-    <!-- </div> -->
     <div
       class="row xproduct-list xgrid_full xgrid_sidebar xgrid-uniform xcontainer-fluid"
     >
@@ -45,7 +20,9 @@
         </div>
       </div>
       <div v-else>
-        <div class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
+        <div
+          class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6 lg:gap-4"
+        >
           <div
             v-for="i in goodsData.data"
             :key="i.key"
@@ -81,11 +58,7 @@
 </template>
 
 <script setup>
-// import VitrinGoodsListComponentVue from './VitrinGoodsListComponent.vue'
-import VitrinMenuComponentVue from './MenuComponent.vue'
 import VitrinPaginationComponent from './PaginationComponent.vue'
-
-// import ff from VitrinMenuComponentVue
 
 import { watchEffect, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -97,9 +70,6 @@ import GoodComponent from './GoodComponent.vue'
 
 const route = useRoute()
 
-// const GoodsLoading = ref(true)
-
-// catsLevelLower
 const { loading } = catalogs()
 
 const { goodsLoading, goodsData, loadGoods } = goods()
@@ -109,16 +79,9 @@ const stopWatch2 = watchEffect(() => {
   if (loading.value == false) {
     // console.log(2 , loading.value)
     if (route.params.cat_id && route.params.cat_id.length) {
-      // console.log(3, route.params.cat_id)
-      // const toLevelCatalogs = catsLevelLower(route.params.cat_id)
-      // console.log(31, route.params.cat_idtoLevelCatalogs )
-
       const { catNow } = catalogs()
       catNow.value = route.params.cat_id
-
       loadGoods(route.params.cat_id, route.params.page)
-
-      // GoodsLoading.value = false
     }
   }
 })
