@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div v-if="i.image[0]['uri']" 
+    <div
+      v-if="i.image[0]['uri']"
       class="preview text-center"
-      :style="'background-image: url('+ i.image[0]['uri'] +');'">
+      :style="'background-image: url(' + i.image[0]['uri'] + ');'"
+    >
       <span class="flex items-center">
-      <img :src="i.image[0]['uri']" />
+        <img :src="i.image[0]['uri']" loading="lazy" />
       </span>
     </div>
     <b>{{ i.name }}</b>
@@ -67,17 +69,17 @@ const showAr = ref(false)
   margin-bottom: 1vh;
 }
 .manufacturer{ color: rgb(41,59,119) } */
-.preview{
+.preview {
   background-size: cover;
   xvertical-align: middle;
   background-position: center center;
   /* max-width: 300px; */
 }
-.preview span{
-  background-color: rgba(255,255,255,0.8);
+.preview span {
+  background-color: rgba(255, 255, 255, 0.8);
   min-height: 150px;
 }
-.preview span img{
+.preview span img {
   max-height: 200px;
 }
 </style>

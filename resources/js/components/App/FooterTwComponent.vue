@@ -164,12 +164,15 @@
     </div>
   </div>
   <div class="text-center p-6 bg-gray-200">
-    <span>© 2021 Copyright:</span>
-    <a class="text-gray-600 font-semibold" href="https://tailwind-elements.com/">Tailwind Elements</a>
+    <span>© {{ dateY }} Все права защищены.</span>
+    <a class="text-gray-600 font-semibold" href="https://php-cat.com/">Создание сайта: Команда котиков PHP-cat.com</a>
   </div>
 </footer>
 </template>
 
-<script setup></script>
+<script setup>
+let currentTime = new Date()
+const dateY = currentTime.getFullYear()
+</script>
 
 <style scoped></style>

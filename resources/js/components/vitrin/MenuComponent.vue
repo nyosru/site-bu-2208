@@ -1,6 +1,5 @@
 <template>
-
-<!-- <div>
+  <!-- <div>
   leftMenu: {{ leftMenu }}
 </div> -->
 
@@ -21,7 +20,11 @@
 </template>
 
 <script setup>
-// import { watchEffect, ref, onMounted, watch } from 'vue'
+import {
+  // watchEffect, ref,
+  onMounted,
+  // watch
+} from 'vue'
 import { useRoute } from 'vue-router'
 import catalogs from './../../use/catalogs.js'
 
@@ -100,7 +103,30 @@ const {
 //   }
 // })
 
+onMounted(() => {
+  const to = useRoute()
 
+console.log('to',to);
+
+  const {
+    // loadData,
+    // data: allMenu,
+    // loading,
+    catsLevelLower,
+    catsLevelLowerStart,
+    // leftMenu,
+  } = catalogs()
+
+  if (to.name == 'index') {
+    //     // console.log('001')
+    //     // @click="catNow='';stepCrumb={}"
+    catsLevelLowerStart()
+  } else {
+    let cat_id = to.params.cat_id ? to.params.cat_id : 0
+    console.log('002', 'cat_id = ', cat_id)
+    catsLevelLower(cat_id)
+  }
+})
 </script>
 
 <style scoped>

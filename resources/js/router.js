@@ -4,6 +4,9 @@ import {
     createWebHistory,
 } from 'vue-router'
 
+// import { onMounted } from 'vue'
+// import { useRoute } from 'vue-router'
+
 import BreadcrumbsComponent from './components/BreadcrumbsComponent.vue'
 // import UpBannerComponent from './components/IndexUpBannersComponent.vue'
 // import StarterComponent from './components/StarterComponent.vue'
@@ -163,6 +166,8 @@ const router = new createRouter({
     },
 })
 
+
+
 // // скрываем меню при любом переходе по ссылке
 import catalogs from './use/catalogs.js'
 const {
@@ -202,5 +207,6 @@ router.afterEach((to, from) => {
     //       )
     //     }
 })
+
 
 export default router

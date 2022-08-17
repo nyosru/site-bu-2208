@@ -22,31 +22,37 @@ const leftMenu = ref([])
 /**
  * тащим все вложенные каталоги в указанный
  */
-const catsLevelLower = (id = '') => {
-    const res = data.value.filter(function(e) {
-        return e.cat_up_id == id
-    })
-
-    if (res.length) {
-        leftMenu.value = res
-    }
-}
-
-const catsLevelLowerStart = () => {
-    // console.log('catsLevelLowerStart' , data.value)
-
+const catsLevelLower = async(id = '') => {
     if (data.value.length == 0) {
-        loadData()
+        await loadData()
     }
 
     if (data.value.length > 0) {
-        const res = data.value.filter(function(e) {
+        const res = await data.value.filter(function(e) {
+            return e.cat_up_id == id
+        })
+
+        if (res.length) {
+            leftMenu.value = res
+        }
+    }
+}
+
+const catsLevelLowerStart = async() => {
+    // console.log('catsLevelLowerStart' , data.value)
+
+    if (data.value.length == 0) {
+        await loadData()
+    }
+
+    if (data.value.length > 0) {
+        const res = await data.value.filter(function(e) {
             return !e.cat_up_id
         })
 
         if (res.length) {
             leftMenu.value = res
-                // console.log('catsLevelLowerStart 00 fin', 'результатов:', res.length)
+            console.log('catsLevelLowerStart 00 fin', 'результатов:', res.length)
         }
     }
 }
@@ -92,7 +98,6 @@ const loadData = async(cat_id = null) => {
             })
     }
 }
-
 
 const stepCrumb = ref([])
 
