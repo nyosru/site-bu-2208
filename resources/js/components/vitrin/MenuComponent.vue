@@ -1,31 +1,34 @@
 <template>
-  <div v-if="leftMenu && leftMenu.length" class="text-center mb-5">
-    <!-- menu tpl -->
-    <!-- <br />
+  <div v-if="leftMenu && leftMenu.length" class="row">
+    <div class="text-center mb-5 leading-6">
+      <!-- menu tpl -->
+      <!-- <br />
     leftMenu : {{ leftMenu }}
     <br />
     <br />
     route: {{ route }}
     <br /> -->
 
-    <!-- allMenu: {{ allMenu.length }} -->
-    <!-- toLevelCatalogs: {{ toLevelCatalogs }} -->
+      <!-- allMenu: {{ allMenu.length }} -->
+      <!-- toLevelCatalogs: {{ toLevelCatalogs }} -->
 
-    <template v-for="v in leftMenu" :key="v.id">
-      <!-- v: {{ v }} -->
+      <template v-for="v in leftMenu" :key="v.id">
+        <!-- v: {{ v }} -->
 
-      <router-link
-        :to="'/cat/' + v.id"
-        class="text-base mr-3 px-2 py-1"
-        :class="{ 'bg-green-300': route.params.cat_id == v.id }"
-      >
-        {{ v.name }}
-      </router-link>
+        <router-link
+          :to="'/cat/' + v.id"
+          class="text-base mr-3 px-2 py-1 whitespace-nowrap"
+          :class="{ 'bg-green-300': route.params.cat_id == v.id }"
+        >
+          {{ v.name }}
+        </router-link>
+        &nbsp;
 
-      <!-- <router-link :to="{ name: 'cat', params: { cat_id: v.id } }">
+        <!-- <router-link :to="{ name: 'cat', params: { cat_id: v.id } }">
         {{ v.name }}
       </router-link> -->
-    </template>
+      </template>
+    </div>
   </div>
 </template>
 

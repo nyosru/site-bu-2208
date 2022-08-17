@@ -1,7 +1,7 @@
 <template>
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div
-    v-if="inf && inf.links"
+    v-if="inf && inf.links && inf.links.length > 3"
     class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
   >
     <div class="flex-1 flex justify-between sm:hidden">
@@ -9,13 +9,13 @@
         href="#"
         class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
       >
-        Previous
+       Стр. 1 &#8592; 
       </a>
       <a
         href="#"
         class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
       >
-        Next
+        &#8594; Cтр. 2
       </a>
     </div>
     <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
@@ -30,6 +30,7 @@
           results
         </p> -->
       </div>
+      <!-- inf.links: {{ inf.links }} -->
       <div>
         <nav
           class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"

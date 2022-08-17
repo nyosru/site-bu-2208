@@ -6,7 +6,7 @@
       </div>
     </div> -->
 
-    <div class="row" v-if="false">
+    <!-- <div class="row" v-if="false">
       <div class="col-12 text-center">
         <template
           v-if="
@@ -17,16 +17,14 @@
           "
         ></template>
         <template v-else>
-          <!-- <br /> -->
-          <!-- <br /> -->
         </template>
       </div>
-    </div>
-    <div
+    </div> -->
+    <!-- <div
       class="row xproduct-list xgrid_full xgrid_sidebar xgrid-uniform xcontainer-fluid"
-    >
+    > -->
       <vitrin-menu-component-vue></vitrin-menu-component-vue>
-    </div>
+    <!-- </div> -->
     <div
       class="row xproduct-list xgrid_full xgrid_sidebar xgrid-uniform xcontainer-fluid"
     >
@@ -47,27 +45,17 @@
         </div>
       </div>
       <div v-else>
-        <!-- xclass="grid grid-rows-2 md:grid-rows-6" -->
-        <!-- xxclass="flex flex-wrap" -->
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          <!-- goodsData: {{ goodsData }} -->
-          <!-- <br /> -->
-          <!-- goodsLoading: {{ goodsLoading }} -->
-          <!-- <vitrin-pagination-component /> -->
+        <div class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
           <div
             v-for="i in goodsData.data"
             :key="i.key"
             xclass="col-xs-6 col-sm-4 col-md-3 col-lg-2"
           >
-            <vitrin-goods-list-item :i="i" />
-            <!-- i: {{ i }} -->
-            <!-- {{ i.name }} -->
+            <good-component :i="i" />
             <br />
             <br />
           </div>
         </div>
-
-        <!-- <vitrin-pagination-component :inf="goodsData.meta" /> -->
 
         <template
           v-if="
@@ -105,7 +93,7 @@ import { useRoute } from 'vue-router'
 import catalogs from './../../use/catalogs.js'
 import goods from './../../use/goods.js'
 
-import VitrinGoodsListItem from './GoodsItemComponent.vue'
+import GoodComponent from './GoodComponent.vue'
 
 const route = useRoute()
 
