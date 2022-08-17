@@ -2,7 +2,7 @@
   <header-tw-component></header-tw-component>
 
   <!-- route: {{ $route }} -->
-111
+
   <div class="content1">
     <router-view name="BreadcrumbsComponent" />
     <router-view name="MenuComponent" />
