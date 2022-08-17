@@ -44,6 +44,8 @@ jobs:
           script: |
             cd www 
             cd ${{ secrets.FOLDER_PROD }} 
+            /opt/php74/bin/php ./composer.phar dumpautoload
+            /opt/php74/bin/php ./composer.phar update
             /opt/php74/bin/php ./composer.phar i 
             /opt/php74/bin/php artisan migrate
             
