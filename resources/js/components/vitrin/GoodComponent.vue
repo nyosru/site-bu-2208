@@ -68,7 +68,7 @@ const catName = ref('')
 
 if (route.params.cat_id != props.i.cat_id) {
   let cc = searchCat(props.i.cat_id)
-  console.log('searchCat', cc)
+  // console.log('searchCat', cc)
   catName.value = cc.name
 }
 
