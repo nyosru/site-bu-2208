@@ -6,7 +6,7 @@ const types = ref([{
         buttonClass: 'text-blue-500 border-gray-500',
         buttonClassActive: 'text-blue-700 border-blue-500 bg-blue-200',
         bg: 'text-blue-700 bg-blue-200',
-        active: true,
+        active: false,
     },
     {
         str: 'buy',
@@ -14,7 +14,7 @@ const types = ref([{
         buttonClass: 'text-green-500 border-gray-500',
         buttonClassActive: 'text-green-700 border-green-500 bg-green-200',
         bg: 'text-green-700 bg-green-200',
-        active: true,
+        active: false,
     },
     {
         str: 'renta',
@@ -22,7 +22,7 @@ const types = ref([{
         buttonClass: 'text-orange-500 border-gray-500',
         buttonClassActive: 'text-orange-700 border-orange-500 bg-orange-200',
         bg: 'text-orange-700 bg-orange-200',
-        active: true,
+        active: false,
     },
     {
         str: 'need_renta',
@@ -30,7 +30,7 @@ const types = ref([{
         buttonClass: 'text-red-500 border-gray-500',
         buttonClassActive: 'text-red-700 border-red-500 bg-red-200',
         bg: 'text-red-700 bg-red-200',
-        active: true,
+        active: false,
     },
 ])
 
@@ -50,10 +50,19 @@ const typesNow = ref([])
 // )
 
 const changeType = (typeStr) => {
+    let colvoActive = types.value.filter((i) => i.active == true)
+
     types.value.forEach(function(item, i, arr) {
         if (item.str == typeStr) {
             item.active = !item.active
         }
+    })
+    setTypesNow()
+}
+
+const clearType = () => {
+    types.value.forEach(function(item, i, arr) {
+        item.active = false
     })
     setTypesNow()
 }
@@ -121,6 +130,7 @@ const setTypesNow = () => {
 
 export default function types_js() {
     return {
+        clearType,
         typesNow,
         types,
         changeType,

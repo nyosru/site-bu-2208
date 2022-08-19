@@ -2,7 +2,7 @@
   <div class="text-lg">
     <div
       v-if="i.image[0]['uri']"
-      class="preview text-center"
+      class="preview text-center "
       :style="'background-image: url(' + i.image[0]['uri'] + ');'"
       style="position: relative;"
     >

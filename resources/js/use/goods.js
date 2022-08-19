@@ -30,6 +30,8 @@ const page01 = ref(0)
 import types_js from './types.js'
 const { types, changeType, typesNow } = types_js()
 
+const loadAx = ref(false)
+
 // const loadData = (module, db_connection = 'out') => {
 const loadGoods = (cat_id, page = 0) => {
     goodsData.value = []
@@ -48,12 +50,12 @@ const loadGoods = (cat_id, page = 0) => {
     }
 
     // window.scrollTo(0,0)
-
     axios
         .get(
             '/api/goodscat/' +
             cat_id +
-            (page0.value.length > 0 ? '?' + page0.value : ''),
+            (page0.value.length > 0 ? '?' + page0.value : '')
+            // , { signal: controller.signal }
         )
         .then((response) => {
             // console.log("get_datar", response.data);

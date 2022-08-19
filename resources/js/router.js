@@ -166,8 +166,6 @@ const router = new createRouter({
     },
 })
 
-
-
 // // скрываем меню при любом переходе по ссылке
 import catalogs from './use/catalogs.js'
 const {
@@ -175,6 +173,10 @@ const {
     catsLevelLower,
     catsLevelLowerStart,
 } = catalogs()
+
+import types_js from './use/types.js'
+const { clearType } = types_js()
+
 router.afterEach((to, from) => {
     // console.log('router.afterEach((to, from) => {')
     // console.log(
@@ -184,6 +186,10 @@ router.afterEach((to, from) => {
     //     )
     //   console.log(1122)
     // showMenu.value = false
+
+    if (to.params.cat_id != from.params.cat_id) {
+        clearType()
+    }
 
     if (to.name == 'index') {
         //     // console.log('001')
@@ -207,6 +213,5 @@ router.afterEach((to, from) => {
     //       )
     //     }
 })
-
 
 export default router

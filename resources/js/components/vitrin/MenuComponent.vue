@@ -4,7 +4,7 @@
 </div> -->
 
   <div v-if="leftMenu && leftMenu.length" class="row">
-    <div class="text-center mb-5 leading-8">
+    <div class="text-center mb-5 leading-6">
       <template v-for="v in leftMenu" :key="v.id">
         <router-link
           :to="'/cat/' + v.id"

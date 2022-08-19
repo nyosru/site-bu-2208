@@ -22,38 +22,52 @@
           </div>
         </div>
       </div>
+
       <div v-else>
+
         <div
-          class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6 lg:gap-4 px-0 md:px-5"
+          v-if="goodsData.data && !goodsData.data.length"
+          class="text-center py-10"
         >
-          <div
-            v-for="i in goodsData.data"
-            :key="i.key"
-            xclass="col-xs-6 col-sm-4 col-md-3 col-lg-2"
-          >
-            <good-component :i="i" />
-            <br />
-            <br />
-          </div>
+          <h3>упс ... извините, не найдено обьявлений. <a href="#" >Добавьте первое</a> </h3>
         </div>
 
-        <template
-          v-if="
-            !goodsLoading &&
-            goodsData.meta &&
-            goodsData.meta.links &&
-            goodsData.meta.links.length > 3
-          "
-        >
-          <br clear="all" />
-          <vitrin-pagination-component
-            v-if="!goodsLoading"
-            :inf="goodsData.meta"
-          />
-        </template>
         <template v-else>
+
+          <div
+            class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6 lg:gap-4 px-0 md:px-5"
+          >
+            <div
+              v-for="i in goodsData.data"
+              :key="i.key"
+              xclass="col-xs-6 col-sm-4 col-md-3 col-lg-2"
+            >
+              <good-component :i="i" />
+              <br />
+              <br />
+            </div>
+          </div>
+
+          <template
+            v-if="
+              !goodsLoading &&
+              goodsData.meta &&
+              goodsData.meta.links &&
+              goodsData.meta.links.length > 3
+            "
+          >
+            <br clear="all" />
+            <vitrin-pagination-component
+              v-if="!goodsLoading"
+              :inf="goodsData.meta"
+            />
+          </template>
+
+          <!-- <template v-else>
           <br />
           <br />
+        </template> -->
+
         </template>
       </div>
     </div>
@@ -86,12 +100,12 @@ const stopWatch2 = watchEffect(() => {
   if (loading.value == false) {
     // console.log(2 , loading.value)
     if (route.params.cat_id && route.params.cat_id.length) {
-    // if ( typesNow.value && typesNow.value.length ) {
-      console.log(typesNow.value);
+      // if ( typesNow.value && typesNow.value.length ) {
+      console.log(typesNow.value)
       const { catNow } = catalogs()
       catNow.value = route.params.cat_id
       loadGoods(route.params.cat_id, route.params.page)
-    // }
+      // }
     }
   }
 })
