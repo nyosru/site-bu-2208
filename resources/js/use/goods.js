@@ -27,23 +27,34 @@ const goodLoading = ref(true)
 const page0 = ref('')
 const page01 = ref(0)
 
+import types_js from './types.js'
+const { types, changeType, typesNow } = types_js()
+
 // const loadData = (module, db_connection = 'out') => {
 const loadGoods = (cat_id, page = 0) => {
     goodsData.value = []
     goodsLoading.value = true
 
     if (page > 0) {
-        page0.value = '?page=' + page
+        page0.value = 'page=' + page
         page01.value = page
     } else {
         page0.value = ''
         page01.value = 0
     }
 
+    if (typesNow.value && typesNow.value.length) {
+        page0.value += '&type[]=' + typesNow.value.join('&type[]=')
+    }
+
     // window.scrollTo(0,0)
 
     axios
-        .get('/api/goodscat/' + cat_id + page0.value)
+        .get(
+            '/api/goodscat/' +
+            cat_id +
+            (page0.value.length > 0 ? '?' + page0.value : ''),
+        )
         .then((response) => {
             // console.log("get_datar", response.data);
             // items_loading_module.value = items_now_loading.value;
@@ -66,12 +77,9 @@ const loadGoods = (cat_id, page = 0) => {
 const searchString = ref('')
 const searchStringNow = ref('')
 
-
-
 // import { useRouter, useRoute } from 'vue-router'
 // const router = useRouter()
 // const route = useRoute()
-
 
 const loadSearchGoods = (search, page = 0) => {
     goodsData.value = []

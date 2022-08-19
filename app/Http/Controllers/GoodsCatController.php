@@ -38,17 +38,34 @@ class GoodsCatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(request $r, $id)
     {
+        // dd($r->type);
         $ids = self::getCatsInner($id);
         // dd($ids);
         // $ids = [1, 2, 3, '00000071', 'ЦБ002029'];
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->get());
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->simplePaginate(10));
         // return new GoodCollection(Good::whereIn('a_categoryid', $ids)->where('status', 'show')->paginate(50));
-        return new GoodCollection(Good::with('image')->whereIn('cat_id', $ids)->
-        // where('status', 'show')->
-        paginate(50));
+        return new GoodCollection(Good::with('image')->
+            //
+            // whereIn('cat_id', $ids)->
+            //
+            where(function ($query) use ($ids, $r) {
+                $query
+                    //
+                    ->whereIn('cat_id', $ids)
+                    //
+                    // ->where('name', 'Abigail')
+                    //
+                    // ->where('votes', '>', 50);
+                ;
+                if (!empty($r->type)) {
+                    $query->whereIn('type', $r->type);
+                }
+            })->
+            // where('status', 'show')->
+            paginate(50));
     }
 
     /**
@@ -71,9 +88,9 @@ class GoodsCatController extends Controller
             // ->whereIn('id', [1, 2, 3])
             // ->union($a)
             // ->get()
-            ;
+        ;
 
-            $a = $a->union($a1);
+        $a = $a->union($a1);
 
         $a2 = DB::table('cats as m')
             ->join('cats as m2', 'm2.cat_up_id', '=', 'm.id')
@@ -83,8 +100,8 @@ class GoodsCatController extends Controller
             // ->whereIn('id', [1, 2, 3])
             // ->union($a1)
             // ->get()
-            ;
-            $a = $a->union($a2);
+        ;
+        $a = $a->union($a2);
         $a3 = DB::table('cats as m')
             ->join('cats as m2', 'm2.cat_up_id', '=', 'm.id')
             ->join('cats as m3', 'm3.cat_up_id', '=', 'm2.id')
@@ -94,8 +111,8 @@ class GoodsCatController extends Controller
             // ->whereIn('id', [1, 2, 3])
             // ->union($a2)
             // ->get()
-            ;
-            $a = $a->union($a3);
+        ;
+        $a = $a->union($a3);
         $a4 = DB::table('cats as m')
             ->join('cats as m2', 'm2.cat_up_id', '=', 'm.id')
             ->join('cats as m3', 'm3.cat_up_id', '=', 'm2.id')
@@ -106,14 +123,14 @@ class GoodsCatController extends Controller
             // ->whereIn('id', [1, 2, 3])
             // ->union($a3)
             // ->get()
-            ;
-            $a = $a->union($a4);
-            $aaa = $a->get();
+        ;
+        $a = $a->union($a4);
+        $aaa = $a->get();
         // dd($a1);
         $r = [];
         $r[] = $id_cat;
         // foreach( $a4 as $k ){
-        foreach( $aaa as $k ){
+        foreach ($aaa as $k) {
             // dd($k);
             $r[] = $k->id;
         }

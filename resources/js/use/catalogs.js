@@ -57,6 +57,11 @@ const catsLevelLowerStart = async() => {
     }
 }
 
+const searchCat = (cat_id) => {
+    // console.log('searchCat')
+    return data.value.find((i) => i.id == cat_id)
+}
+
 // показ или скрыть меню главное
 const showMenu = ref(false)
 
@@ -109,8 +114,12 @@ const stepCrumb = ref([])
 //   // catsLevelLower('')
 // }
 
+
 export default function catalogs() {
     return {
+
+        // ищем каталог по номеру id
+        searchCat,
         catNow,
         // goToIndex,
         // список шагов для хлебных крошек

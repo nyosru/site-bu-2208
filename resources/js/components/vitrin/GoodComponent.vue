@@ -1,23 +1,42 @@
 <template>
-  <div>
+  <div class="text-lg">
     <div
       v-if="i.image[0]['uri']"
       class="preview text-center"
       :style="'background-image: url(' + i.image[0]['uri'] + ');'"
+      style="position: relative;"
     >
       <span class="flex items-center">
+      <good-type-component :type="i.type" />
         <img :src="i.image[0]['uri']" loading="lazy" />
       </span>
     </div>
+    <div v-if="catName != ''" class="color-gray">{{ catName }}</div>
     <b>{{ i.name }}</b>
-    {{ i.opis }}
-
-    <!-- {{ i.image[0]['uri'] }} -->
-
-    <button @click="showAr = !showAr">11</button>
-    <small v-if="showAr">
-      {{ i }}
-    </small>
+    <br />
+    <!-- {{ i.opis }} -->
+    <VueNumberFormat
+      v-model:value="i.price"
+      :options="{
+        precision: 0,
+        prefix: '',
+        suffix: ' ₽',
+        decimal: '0',
+        thousand: '`',
+        acceptNegative: false,
+        isInteger: false,
+      }"
+    ></VueNumberFormat>
+    <div v-if="true">
+      <!-- <Br/> -->
+      <!-- {{ i.price }} -->
+      <br />
+      <br />
+      <button @click="showAr = !showAr" class="text-xs">инфо</button>
+      <small v-if="showAr">
+        {{ i }}
+      </small>
+    </div>
   </div>
 </template>
 
@@ -28,13 +47,30 @@ import {
 } from 'vue'
 
 // import cart from './../../use/cart.js'
-// import { useRoute } from 'vue-router'
 
-// const route = useRoute()
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+// import catalogs from './../../use/catalogs.js'
+// import { searchCat } from catalogs()
+
+import catalogs from './../../use/catalogs.js'
+const { searchCat } = catalogs()
+
+import VueNumberFormat from 'vue-number-format'
+import GoodTypeComponent from './GoodTypeComponent.vue'
 
 const props = defineProps({
   i: Object,
 })
+
+const catName = ref('')
+
+if (route.params.cat_id != props.i.cat_id) {
+  let cc = searchCat(props.i.cat_id)
+  console.log('searchCat', cc)
+  catName.value = cc.name
+}
 
 const showAr = ref(false)
 

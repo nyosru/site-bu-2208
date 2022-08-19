@@ -5,7 +5,7 @@
     >
       <ul class="other-link-sub xpull-right">
         <li>
-          <router-link :to="{ name: 'index' }" title="">
+          <router-link :to="{ name: 'index' }" @click="catNow=''" title="">
             Витрина
           </router-link>
         </li>
@@ -30,11 +30,18 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import { ref, watchEffect } from 'vue'
-import catalogs from './../use/catalogs.js'
+const nowPage = ref([])
 
+import { useRoute } from 'vue-router'
 const route = useRoute()
+
+import catalogs from './../use/catalogs.js'
+const { catNow, stepCrumb } = catalogs()
+
+import page from './../use/page.js'
+const { whatThisPage } = page()
+
 
 // тащим инфу по каталогам что выше текущего
 function getStepCats(cat_id) {
@@ -70,13 +77,6 @@ function getStepCats(cat_id) {
     }
   }
 }
-
-const { catNow, stepCrumb } = catalogs()
-
-const nowPage = ref([])
-
-import page from './../use/page.js'
-const { whatThisPage } = page()
 
 const stopWatch = watchEffect(() => {
   stepCrumb.value = []
