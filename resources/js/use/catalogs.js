@@ -114,10 +114,8 @@ const stepCrumb = ref([])
 //   // catsLevelLower('')
 // }
 
-
 export default function catalogs() {
     return {
-
         // ищем каталог по номеру id
         searchCat,
         catNow,
@@ -152,5 +150,6 @@ export default function catalogs() {
         leftMenu,
         //
         catNow,
+
     }
 }

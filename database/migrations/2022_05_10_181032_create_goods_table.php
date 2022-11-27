@@ -17,10 +17,13 @@ class CreateGoodsTable extends Migration
             $table->id();
 
             $table->string('name');
+
             $table->text('opis')
                 ->nullable();
+                
             $table->float('price', 10, 2)
                 ->nullable();
+
             $table->enum('type', ['sell', 'renta', 'buy', 'need_renta']);
 
             $table->integer('cat_id')

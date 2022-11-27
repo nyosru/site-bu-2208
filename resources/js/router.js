@@ -16,7 +16,11 @@ import MenuComponent from './components/vitrin/MenuComponent.vue'
 // import SearchComponent from './components/SearchComponent.vue'
 import PageComponent from './components/page/Component.vue'
 import CartComponent from './components/Cart/Component.vue'
-// import GoodComponent from './components/GoodComponent.vue'
+
+import GoodComponent from './components/vitrin/GoodFullComponent.vue'
+
+import LinesComponent from './components/lines/LinesComponent.vue'
+import Lines2Component from './components/lines2/Component.vue'
 
 // import IndexLineAdver from './components/IndexLineAdverComponent.vue'
 // import AddGoodComponent from './components/AddGoodComponent.vue'
@@ -27,6 +31,38 @@ const routes = [
     //     component: () =>
     //         import ('./components/App/AppComponent.vue')
     // },
+
+    {
+        path: '/lines',
+        name: 'lines',
+        components: {
+            // BreadcrumbsComponent,
+            // MenuComponent,
+            // adver: UpBannerComponent,
+            // adverList: IndexLineAdver,
+            // starter: StarterComponent,
+            // page: null,
+            // cart: null,
+            // vitrin: null,
+            vitrin: LinesComponent,
+        },
+    },
+
+    {
+        path: '/lines2',
+        name: 'lines2',
+        components: {
+            // BreadcrumbsComponent,
+            // MenuComponent,
+            // adver: UpBannerComponent,
+            // adverList: IndexLineAdver,
+            // starter: StarterComponent,
+            // page: null,
+            // cart: null,
+            // vitrin: null,
+            vitrin: Lines2Component,
+        },
+    },
 
     {
         path: '/',
@@ -64,15 +100,15 @@ const routes = [
         },
     },
 
-    // // товар 1 показ
-    // {
-    //     path: '/good/:good_id/:dop?',
-    //     name: 'good',
-    //     components: {
-    //         BreadcrumbsComponent,
-    //         vitrin: GoodComponent,
-    //     },
-    // },
+    // товар 1 показ
+    {
+        path: '/good/:good_id/:dop?',
+        name: 'good',
+        components: {
+            BreadcrumbsComponent,
+            vitrin: GoodComponent,
+        },
+    },
     // {
     //     path: '/show/i/:good_id/:dop?',
     //     name: 'good2',
@@ -168,28 +204,46 @@ const router = new createRouter({
 
 // // скрываем меню при любом переходе по ссылке
 import catalogs from './use/catalogs.js'
+import { nextTick } from 'vue'
 const {
     // showMenu,
     catsLevelLower,
-    catsLevelLowerStart,
 } = catalogs()
 
-import types_js from './use/types.js'
-const { clearType } = types_js()
+// // товары отмена загрузки
+// import goods from './use/goods.js'
+// const { GoodsLevelLowerStart, GoodsCancelTokenSource } = goods()
+
+// сброс типов при переходе на др каталог
+// import types_js from './use/types.js'
+// const { clearType } = types_js()
+
+// router.beforeEach((to, from) => {
+//     GoodsCancelTokenSource.cancel(
+//         'GoodsCancelTokenSource Operation canceled by the user.',
+//     )
+// })
+
+// router.beforeEach((to, from, next) => {
+//     console.log('router.beforeEach', to, from, next)
+//     next()
+// })
 
 router.afterEach((to, from) => {
-    // console.log('router.afterEach((to, from) => {')
-    // console.log(
-    //         'from', from,
-    //         'to',
-    //         to,
-    //     )
-    //   console.log(1122)
-    // showMenu.value = false
+    console.log('router.afterEach', to, from)
+        // console.log('router.afterEach((to, from) => {')
+        // console.log(
+        //         'from', from,
+        //         'to',
+        //         to,
+        //     )
+        //   console.log(1122)
+        // showMenu.value = false
 
-    if (to.params.cat_id != from.params.cat_id) {
-        clearType()
-    }
+    // сброс типов при переходе на др каталог
+    // if (to.params.cat_id != from.params.cat_id) {
+    //     clearType()
+    // }
 
     if (to.name == 'index') {
         //     // console.log('001')

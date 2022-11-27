@@ -1,16 +1,27 @@
 <template>
   <div class="text-lg">
-    <div
-      v-if="i.image[0]['uri']"
-      class="preview text-center "
-      :style="'background-image: url(' + i.image[0]['uri'] + ');'"
-      style="position: relative;"
+    <!-- i.id {{ i.id }} -->
+    <router-link
+      :to="{
+        name: 'good',
+        params: {
+          good_id: i.id,
+        },
+      }"
     >
-      <span class="flex items-center">
-      <good-type-component :type="i.type" />
-        <img :src="i.image[0]['uri']" loading="lazy" />
-      </span>
-    </div>
+      <div
+        v-if="i.image[0]['uri']"
+        class="preview text-center"
+        :style="'background-image: url(' + i.image[0]['uri'] + ');'"
+        style="position: relative;"
+      >
+        <span class="flex items-center">
+          <good-type-component :type="i.type" />
+          <img :src="i.image[0]['uri']" loading="lazy" alt="" />
+        </span>
+      </div>
+    </router-link>
+    
     <div v-if="catName != ''" class="color-gray">{{ catName }}</div>
     <b>{{ i.name }}</b>
     <br />

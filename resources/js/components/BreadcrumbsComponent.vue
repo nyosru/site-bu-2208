@@ -1,20 +1,22 @@
 <template>
   <div class="container mx-auto">
     <div
+      style="z-index: -1;"
       class="relative w-full pl-5 py-3 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light"
     >
       <ul class="other-link-sub xpull-right">
+
         <li>
-          <router-link :to="{ name: 'index' }" @click="catNow=''" title="">
-            Витрина
+          <router-link :to="{ name: 'index' }" @click="catNow = ''" title="">
+            Витрина.
           </router-link>
         </li>
 
         <template v-for="n in stepCrumb">
           <li :key="n.id" v-if="n.name">
-            <span v-if="n.type == 'page'">{{ n.name }}</span>
+            <!-- <span v-if="n.type == 'page'">{{ n.name }}</span> -->
             <router-link
-              v-else
+              xv-else
               :to="{
                 name: n.type ?? 'cat',
                 params: { cat_id: n.id },
@@ -24,6 +26,7 @@
             </router-link>
           </li>
         </template>
+
       </ul>
     </div>
   </div>
@@ -41,7 +44,6 @@ const { catNow, stepCrumb } = catalogs()
 
 import page from './../use/page.js'
 const { whatThisPage } = page()
-
 
 // тащим инфу по каталогам что выше текущего
 function getStepCats(cat_id) {
@@ -79,6 +81,8 @@ function getStepCats(cat_id) {
 }
 
 const stopWatch = watchEffect(() => {
+  // console.log('breadcrumb');
+
   stepCrumb.value = []
 
   if (route.name == 'page') {
@@ -108,7 +112,7 @@ const stopWatch = watchEffect(() => {
     })
     // console.log(stepCrumb.value)
     window.scrollTo(0, 0)
-  } else if (catNow.value && catNow.value.length) {
+  } else if (catNow.value && catNow.value > 0) {
     stepCrumb.value = getStepCats(catNow.value)
   }
 })

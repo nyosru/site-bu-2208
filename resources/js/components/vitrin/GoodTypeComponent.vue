@@ -2,7 +2,7 @@
   <div
     v-if="t.name != ''"
     :class="[t.bg]"
-    class="text-xs text-white px-3 py-1 typeInfo"
+    class="text-xs px-3 py-1 typeInfo"
   >
     {{ t.name }}
   </div>

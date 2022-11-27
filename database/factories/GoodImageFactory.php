@@ -15,7 +15,8 @@ class GoodImageFactory extends Factory
     {
         
         $in = [
-            'uri' => 'http://placeimg.com/'.rand(640,960).'/'.rand(240,480).'/any',
+            // 'uri' => 'http://placeimg.com/'.rand(640,960).'/'.rand(240,480).'/any',
+            'uri' => '/storage/photo_no.jpg',
             'good_id' => rand(1,1000),
         ];
 

@@ -95,16 +95,32 @@ const { types, typesNow } = types_js()
 
 const { goodsLoading, goodsData, loadGoods } = goods()
 
+
+
+// const loadGoodsCatId = ref(false)
+
+
 const stopWatch2 = watchEffect(() => {
   // console.log(1)
   if (loading.value == false) {
     // console.log(2 , loading.value)
-    if (route.params.cat_id && route.params.cat_id.length) {
+    if ( 
+      // loadGoodsCatId.value === false && 
+      route.params.cat_id 
+      && route.params.cat_id.length
+      ) {
+
+      console.log('watchEffect(()','if (route.params.cat_id && route.params.cat_id.length) {')
+
+      // loadGoodsCatId.value = true 
+
       // if ( typesNow.value && typesNow.value.length ) {
       console.log(typesNow.value)
       const { catNow } = catalogs()
       catNow.value = route.params.cat_id
       loadGoods(route.params.cat_id, route.params.page)
+
+      // loading.value = true
       // }
     }
   }
