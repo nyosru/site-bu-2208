@@ -14,6 +14,6 @@ class GoodImageSeeder extends Seeder
      */
     public function run()
     {
-        GoodImage::factory(50000)->create();
+        GoodImage::factory(5000)->create();
     }
 }

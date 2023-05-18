@@ -21,7 +21,7 @@ class GoodFactory extends Factory
         ];
 
         // if (rand(1, 2) == 2)
-        $in['cat_id'] = rand(1, 100);
+        $in['cat_id'] = rand(1, 500);
 
         $r = rand(1, 4);
         if ($r == 2) {
