@@ -1,0 +1,103 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "обьявления БУ72 - API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cats": {
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "Получение списка всех каталогов",
+                "description": "Метод возвращает данные ...",
+                "operationId": "getCatalogs",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/cat/{id}": {
+            "get": {
+                "tags": [
+                    "Cats"
+                ],
+                "summary": "показ одного каталога",
+                "description": "Метод возвращает данные ...",
+                "operationId": "getCatalog",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id каталога",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Найдено",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    }
+                }
+            }
+        },
+        "/channels/{alias}": {
+            "get": {
+                "tags": [
+                    "Channels"
+                ],
+                "summary": "Получение списка доступных драйверов для канала",
+                "description": "Метод возвращает данные ...",
+                "operationId": "getListAvailableChannel",
+                "parameters": [
+                    {
+                        "name": "alias",
+                        "in": "path",
+                        "description": "Alias канала (email)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/channels/": {
+            "get": {
+                "tags": [
+                    "Channels"
+                ],
+                "summary": "Получить список всех доступных каналов",
+                "description": "Получаем список всех доступных каналов",
+                "operationId": "getChannels",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    }
+                }
+            }
+        }
+    }
+}

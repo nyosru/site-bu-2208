@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\CatalogController;
-use App\Http\Controllers\GoodController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CatalogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('posts', [CatalogController::class,'index'] );
 
-Route::get('cat/{id}', [CatalogController::class,'show'] );
-Route::get('cat-in/{id}', [CatalogController::class,'showIn'] );
+Route::get('cats', [CatalogController::class, 'index']);
 
-Route::get('goodFromCat/{cat_id}', [GoodController::class,'goodFromCat'] );
-Route::get('good/{id}', [GoodController::class,'good'] );
+// Route::get('cats', function (Request $request) {
+//     return json_encode([1 => 2, 'sdf' => 'sdfsdfff']);
+// });
 
-Route::get('posts2', function (Request $request) {
-    $data = [ 'data' => [ 11 , 22 , 333 ] ];
-    // return response()->json($data, 204);
-    return response()->json($data);
-});
+Route::get('cat/{id}', [CatalogController::class, 'show0']);
+Route::get('cat-in/{id}', [CatalogController::class, 'showIn']);
+
+Route::get('goodFromCat/{cat_id}', [GoodController::class, 'goodFromCat']);
+Route::get('good/{id}', [GoodController::class, 'good']);

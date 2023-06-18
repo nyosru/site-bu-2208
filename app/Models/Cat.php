@@ -7,6 +7,41 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Good;
 
+/*
+ * @OA\Definition(
+ *  definition="Каталоги",
+ * 
+ *  @OA\Property(
+ *      property="id",
+ *      type="integer"
+ *  ),
+ *  @OA\Property(
+ *      property="name",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="cat_up_id",
+ *      type="integer"
+ *  )
+ * 
+ * @OA\Property(
+ *     title="Created at",
+ *     description="Created at",
+ *     example="2020-01-27 17:50:45",
+ *     format="datetime",
+ *     type="string"
+ *  )
+ * 
+ * @OA\Property(
+ *     title="Updated at",
+ *     description="Updated at",
+ *     example="2020-01-27 17:50:45",
+ *     format="datetime",
+ *     type="string"
+ *  )
+ * 
+ * )
+ */
 class Cat extends Model
 {
     use HasFactory;
@@ -29,4 +64,7 @@ class Cat extends Model
     {
         return $this->hasMany(Cat::class, 'cat_up_id')->with('children');
     }
+
+
+
 }

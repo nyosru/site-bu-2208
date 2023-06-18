@@ -7,11 +7,24 @@ use App\Http\Resources\CatalogCollection;
 use App\Models\Cat;
 use Illuminate\Support\Facades\DB;
 
+
 class CatalogController extends Controller
 {
-    /*
-     * список всех каталогов
+
+    /**
+     * @OA\Get(
+     *      path="/api/cats",
+     *      operationId="getCatalogs",
+     *      tags={"Cats"},
+     *      summary="Получение списка всех каталогов",
+     *      description="Метод возвращает данные ...",
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *     )
      */
+
     public function index()
     {
         return new CatalogCollection(
@@ -28,13 +41,47 @@ class CatalogController extends Controller
     }
 
     /**
-     * показ одного каталога
+     * 
+     */
+
+    /**
+     * @OA\Get(
+     *      path="/api/cat/{id}",
+     *      operationId="getCatalog",
+     *      tags={"Cats"},
+     *      summary="показ одного каталога",
+     *      description="Метод возвращает данные ...",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="id каталога",
+     *          required=true,
+     *          in="path",
+     * 
+     *          @OA\Schema(
+     *              type="number",
+     *              format="float"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Найдено",
+     *          @OA\JsonContent()
+     *       ),
+     *     @OA\Response(
+     *          response=404,
+     *          description="Не найдено",
+     *       ),
+     *     )
      */
     public function show0(string $id)
     {
-        return new CatalogCollection(Cat::where('id', $id)->
-            // where('status', 'show')->
-            get());
+        $cat = Cat::where('id', $id)->get();
+
+        if (sizeof($cat) === 0)
+            abort('404');
+
+        return new CatalogCollection($cat);
+
     }
 
     public function showIn(string $id)
@@ -144,4 +191,67 @@ class CatalogController extends Controller
         // dd($catIds);
         // return $catIds;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @OA\Get(
+     *      path="/channels/{alias}",
+     *      operationId="getListAvailableChannel",
+     *      tags={"Channels"},
+     *      summary="Получение списка доступных драйверов для канала",
+     *      description="Метод возвращает данные ...",
+     *     @OA\Parameter(
+     *          name="alias",
+     *          description="Alias канала (email)",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *     )
+     */
+    public function getListAvailableChannel()
+    {
+    }
+
+    /**
+     * * @OA\Get(
+     *      path="/channels/",
+     *      operationId="getChannels",
+     *      tags={"Channels"},
+     *      summary="Получить список всех доступных каналов",
+     *      description="Получаем список всех доступных каналов",
+     *     @OA\Response(
+     *         response=200,
+     *          description="successful operation",
+     *       ),
+     *      @OA\Response(
+     *         response=400,
+     *         description="Invalid ID supplied"
+     *      )
+     *     )
+     */
+    //  *          @OA\JsonContent(ref="#/components/schemas/Channel")
+    public function getChannels()
+    {
+        //...
+    }
+
 }
