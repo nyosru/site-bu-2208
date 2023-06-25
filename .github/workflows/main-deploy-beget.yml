@@ -86,6 +86,8 @@ jobs:
             npm i 
             npm run prod
 
+
+            
       - name: send telega
         uses: appleboy/telegram-action@master
         with:
