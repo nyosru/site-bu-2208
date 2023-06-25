@@ -52,16 +52,16 @@ jobs:
 
 
 
-      - name: setup composer pacs on server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.BEGET_IP }}
-          username: ${{ secrets.BEGET_USERNAME }}
-          password: ${{ secrets.BEGET_PASSWORD }}
-          script: |
-            cd ${{ secrets.BEGET_FOLDER }} 
-            php ./composer.phar i 
-            php artisan migrate
+      # - name: setup composer pacs on server
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.BEGET_IP }}
+      #     username: ${{ secrets.BEGET_USERNAME }}
+      #     password: ${{ secrets.BEGET_PASSWORD }}
+      #     script: |
+      #       cd ${{ secrets.BEGET_FOLDER }} 
+      #       php ./composer.phar i 
+      #       php artisan migrate
             
 
 
