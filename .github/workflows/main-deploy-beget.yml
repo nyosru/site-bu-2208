@@ -50,6 +50,8 @@ jobs:
       #       /opt/php74/bin/php ./composer.phar i 
       #       /opt/php74/bin/php artisan migrate
 
+
+      
       - name: setup composer pacs on server
         uses: appleboy/ssh-action@master
         with:
@@ -87,7 +89,7 @@ jobs:
             npm run prod
 
 
-            
+
       - name: send telega
         uses: appleboy/telegram-action@master
         with:
