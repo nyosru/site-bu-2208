@@ -51,7 +51,7 @@ jobs:
       #       /opt/php74/bin/php artisan migrate
 
 
-      
+
       - name: setup composer pacs on server
         uses: appleboy/ssh-action@master
         with:
@@ -60,8 +60,8 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             cd ${{ secrets.BEGET_FOLDER }} 
-            /opt/php74/bin/php ./composer.phar i 
-            /opt/php74/bin/php artisan migrate
+            php ./composer.phar i 
+            php artisan migrate
             
 
 
