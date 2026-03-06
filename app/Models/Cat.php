@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Models\Good;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /*
  * @OA\Definition(
@@ -46,23 +46,19 @@ class Cat extends Model
 {
     use HasFactory;
 
-    // /**
-    //  * Получить комментарии к посту блога.
-    //  */
-    // public function goods()
-    // {
-    //     return $this->hasMany(Good::class, 'cat_id', 'id');
-    // }
+    protected $fillable = [
+        'name',
+        'cat_up_id',
+    ];
 
-    // public function children()
-    // {
-    //     return $this->hasMany(Self::class, 'cat_up_id', 'id')
-    //         ->with('children');
-    // }
-
-    public function children()
+    public function parent(): BelongsTo
     {
-        return $this->hasMany(Cat::class, 'cat_up_id')->with('children');
+        return $this->belongsTo(self::class, 'cat_up_id');
+    }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(self::class, 'cat_up_id');
     }
 
 
