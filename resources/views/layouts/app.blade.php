@@ -12,6 +12,10 @@
     <div class="site-header-main">
         <div class="brand">БУ72</div>
 
+        <a href="{{ route('advertisements.create', ['catalog_id' => request()->route('id')]) }}" class="add-ad-button">
+            Добавить объявление
+        </a>
+
         <div class="auth-area">
             @auth
                 <span class="user-login">Логин: {{ auth()->user()->name ?: auth()->user()->email }}</span>
@@ -31,7 +35,14 @@
     </div>
 </header>
 
-<main class="site-main">
+
+<main class="container mx-auto site-main">
+
+    <livewire:catalog.breadcrumbs />
+
+    @if(session('status'))
+        <div class="flash-status">{{ session('status') }}</div>
+    @endif
     @yield('content')
 </main>
 

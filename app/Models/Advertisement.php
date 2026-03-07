@@ -16,6 +16,8 @@ class Advertisement extends Model
         'catalog_id',
         'title',
         'description',
+        'price',
+        'type',
     ];
 
     public function user(): BelongsTo

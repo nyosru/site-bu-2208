@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="board-intro">
-        <h1>{{ $catalog['name'] }}</h1>
-        <p>Объявления текущего каталога и всех вложенных</p>
+    <section class="mb-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h1 class="text-2xl font-semibold text-slate-900">{{ $catalog['name'] }}</h1>
+        <p class="mt-2 text-sm text-slate-600">Объявления текущего каталога и всех вложенных</p>
 
         @if(!empty($children))
-            <div class="catalog-children">
+            <div class="mt-4 flex flex-wrap gap-2">
                 @foreach($children as $child)
-                    <a href="{{ route('catalog.show', ['id' => $child['id']]) }}" class="catalog-child-link">
+                    <a
+                        href="{{ route('catalog.show', ['id' => $child['id']]) }}"
+                        class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm text-slate-700 transition hover:border-slate-300 hover:bg-slate-100"
+                    >
                         {{ $child['name'] }}
                     </a>
                 @endforeach
@@ -16,37 +19,21 @@
         @endif
     </section>
 
-    <section class="ads-section">
-        <div class="ads-total">Найдено объявлений: {{ $advertisements->total() }}</div>
+    <section class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div class="mb-4 text-sm text-slate-600">Найдено объявлений: {{ $advertisements->total() }}</div>
 
         @if($advertisements->isEmpty())
-            <div class="ads-empty">В этом каталоге объявлений пока нет.</div>
+            <div class="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-600">
+                В этом каталоге объявлений пока нет.
+            </div>
         @else
-            <div class="ads-list">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 @foreach($advertisements as $advertisement)
-                    <article class="ad-card">
-                        <div class="ad-photo-wrap">
-                            @php($photo = $advertisement->photos->first())
-                            @if($photo)
-                                <img src="{{ $photo->path }}" alt="{{ $advertisement->title }}" class="ad-photo">
-                            @else
-                                <div class="ad-photo ad-photo-empty">Нет фото</div>
-                            @endif
-                        </div>
-
-                        <div class="ad-content">
-                            <h3>{{ $advertisement->title }}</h3>
-                            <p>{{ \Illuminate\Support\Str::limit($advertisement->description, 190) }}</p>
-                            <div class="ad-meta">
-                                <span>Автор: {{ $advertisement->user?->name ?? $advertisement->user?->email ?? 'Не указан' }}</span>
-                                <span>ID: {{ $advertisement->id }}</span>
-                            </div>
-                        </div>
-                    </article>
+                    <x-advertisement-card :advertisement="$advertisement" />
                 @endforeach
             </div>
 
-            <div class="ads-pagination">
+            <div class="mt-5">
                 {{ $advertisements->links() }}
             </div>
         @endif

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /*
  * @OA\Definition(
  *  definition="Каталоги",
- * 
+ *
  *  @OA\Property(
  *      property="id",
  *      type="integer"
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *      property="cat_up_id",
  *      type="integer"
  *  )
- * 
+ *
  * @OA\Property(
  *     title="Created at",
  *     description="Created at",
@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     format="datetime",
  *     type="string"
  *  )
- * 
+ *
  * @OA\Property(
  *     title="Updated at",
  *     description="Updated at",
@@ -39,7 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     format="datetime",
  *     type="string"
  *  )
- * 
+ *
  * )
  */
 class Cat extends Model
@@ -60,7 +60,4 @@ class Cat extends Model
     {
         return $this->hasMany(self::class, 'cat_up_id');
     }
-
-
-
 }

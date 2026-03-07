@@ -7,6 +7,7 @@ use App\Models\Good;
 
 class GoodSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -14,6 +15,6 @@ class GoodSeeder extends Seeder
      */
     public function run()
     {
-        Good::factory(5000)->create();
+        Good::factory(50)->create();
     }
 }

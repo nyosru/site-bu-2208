@@ -21,8 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             AvitoCatalogSeeder::class,
-            GoodSeeder::class,
-            GoodImageSeeder::class,
+            AdvertisementSeeder::class,
+            //GoodSeeder::class,
+            //GoodImageSeeder::class,
             PageSeeder::class,
         ]);
     }

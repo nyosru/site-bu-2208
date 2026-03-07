@@ -1,6 +1,10 @@
 <div class="auth-card">
     <h2>Вход</h2>
 
+    @if(session('status'))
+        <p class="status-text">{{ session('status') }}</p>
+    @endif
+
     <form wire:submit="login" class="auth-form">
         <label>
             <span>Email</span>
@@ -25,4 +29,6 @@
 
         <button type="submit">Войти</button>
     </form>
+
+    <p class="muted-text">Нет аккаунта? <a href="{{ route('register') }}">Регистрация</a></p>
 </div>

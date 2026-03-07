@@ -57,6 +57,14 @@ class CatalogQueryService
         return $this->catalogRepository->getDescendantIdsWithSelf($id);
     }
 
+    /**
+     * @return int[]
+     */
+    public function getCurrentAndDescendantIds(int $id): array
+    {
+        return $this->getDescendantIdsWithSelf($id);
+    }
+
     private function mapToDto(CatalogNode $node): CatalogNodeDto
     {
         return new CatalogNodeDto(
@@ -66,4 +74,5 @@ class CatalogQueryService
             children: array_map(fn (CatalogNode $child) => $this->mapToDto($child), $node->children),
         );
     }
+
 }
