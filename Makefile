@@ -14,9 +14,6 @@ prod:
 
 	#make linter-test
 
-	@echo "- - -"
-	@echo "чистим кещ докера"
-	make clear_docker_cache
 
 
 
