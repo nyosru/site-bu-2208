@@ -88,8 +88,8 @@ jobs:
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
           script: |
-            cd ${{ env.DIR }}
-            npm run build
+#             cd ${{ env.DIR }}
+            docker exec -w /home/2208bu 2208bu npm run build
 
   linter_test_report:
     runs-on: ubuntu-latest
@@ -104,8 +104,8 @@ jobs:
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
           script: |
-            cd ${{ env.DIR }}
-            make linter-test
+            docker exec -w /home/2208bu 2208bu make linter-test
+#            cd ${{ env.DIR }}
 #            set +e
 #            make linter-test 2>&1
 #            exit_code=$?
