@@ -18,9 +18,8 @@ class CreateCatsTable extends Migration
 
             $table->string('name');
             $table->integer('cat_up_id')
-                ->nullable()
-                // ->unique()
-            ;
+                ->nullable();
+            // ->unique()
 
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class AdvertisementSeeder extends Seeder
 
     public function run(): void
     {
-        if (!User::query()->exists()) {
+        if (! User::query()->exists()) {
             User::factory(10)->create();
         }
 

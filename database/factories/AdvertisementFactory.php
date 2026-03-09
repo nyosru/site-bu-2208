@@ -17,17 +17,18 @@ class AdvertisementFactory extends Factory
     public function definition(): array
     {
         $return = [
-            'user_id' => fn() => User::query()->inRandomOrder()->value('id')
+            'user_id' => fn () => User::query()->inRandomOrder()->value('id')
                 ?? User::factory()->create()->id,
-            'catalog_id' => fn() => Cat::query()->inRandomOrder()->value('id')
+            'catalog_id' => fn () => Cat::query()->inRandomOrder()->value('id')
                 ?? Cat::query()->create(['name' => fake()->words(2, true)])->id,
             'title' => fake()->sentence(4),
             'description' => fake()->realTextBetween(120, 260),
             'type' => fake()->randomElement(['sell', 'buy']),
         ];
 
-        if ($return['type'] == 'sell' || ($return['type'] == 'buy' && rand(0, 8) != 1))
+        if ($return['type'] == 'sell' || ($return['type'] == 'buy' && rand(0, 8) != 1)) {
             $return['price'] = fake()->randomFloat(2, 100, 500000);
+        }
 
         return $return;
     }

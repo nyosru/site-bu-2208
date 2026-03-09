@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Page;
+use Illuminate\Database\Seeder;
 
 class PageSeeder extends Seeder
 {
-
-
     /**
      * Run the database seeds.
      *
@@ -19,32 +17,32 @@ class PageSeeder extends Seeder
 
         $k = [
             [
-                // 'site' => '' 
+                // 'site' => ''
                 'module' => 'about',
                 'name' => 'О проекте',
                 // 'opis' => '',
-                'html' => '<p>Страница</p>'
+                'html' => '<p>Страница</p>',
             ],
             [
-                // 'site' => '' 
+                // 'site' => ''
                 'module' => 'help',
                 'name' => 'Помощь',
                 // 'opis' => '',
-                'html' => '<p>Страница</p>'
+                'html' => '<p>Страница</p>',
             ],
             [
-                // 'site' => '' 
+                // 'site' => ''
                 'module' => 'konf',
                 'name' => 'Конфеденциальность данных',
                 // 'opis' => '',
-                'html' => '<p>Страница</p>'
+                'html' => '<p>Страница</p>',
             ],
             [
-                // 'site' => '' 
+                // 'site' => ''
                 'module' => 'oferta',
                 'name' => 'Оферта',
                 // 'opis' => '',
-                'html' => '<p>Страница</p>'
+                'html' => '<p>Страница</p>',
             ],
         ];
 
