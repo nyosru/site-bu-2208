@@ -94,7 +94,7 @@ jobs:
   linter_test_report:
     runs-on: ubuntu-latest
     needs: deploy_composer
-    if: ${{ needs.deploy.outputs.run_linter_test == 'true' }}
+    #if: ${{ needs.deploy.outputs.run_linter_test == 'true' }}
     steps:
       - name: Run make linter-test on VPS
         id: run_linter
@@ -105,11 +105,12 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
           script: |
             cd ${{ env.DIR }}
-            set +e
-            make linter-test 2>&1
-            exit_code=$?
-            echo "__LINTER_EXIT_CODE:${exit_code}"
-            exit 0
+            make linter-test
+#            set +e
+#            make linter-test 2>&1
+#            exit_code=$?
+#            echo "__LINTER_EXIT_CODE:${exit_code}"
+#            exit 0
 
       - name: Prepare Telegram message
         id: prepare_message
