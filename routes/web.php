@@ -23,6 +23,7 @@ Route::get('/catalog/{id}', [CatalogPageController::class, 'show'])->name('catal
 Route::get('/advertisements/create', [AdvertisementController::class, 'create'])->name('advertisements.create');
 Route::post('/advertisements/create/step-two', [AdvertisementController::class, 'stepTwo'])->name('advertisements.step-two');
 Route::post('/advertisements', [AdvertisementController::class, 'store'])->name('advertisements.store');
+Route::get('/advertisements/{advertisement}', [AdvertisementController::class, 'show'])->name('advertisements.show');
 
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.login')->name('login');

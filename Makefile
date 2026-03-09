@@ -1,3 +1,9 @@
+b:
+	npm run build
+
+seed:
+	php artisan migrate:fresh --seed
+
 prod:
 	@echo "- - -"
 	@echo "- - -"

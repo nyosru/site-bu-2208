@@ -22,8 +22,6 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AvitoCatalogSeeder::class,
             AdvertisementSeeder::class,
-            //GoodSeeder::class,
-            //GoodImageSeeder::class,
             PageSeeder::class,
         ]);
     }

@@ -87,7 +87,7 @@
                     @enderror
 
                     <div class="step-actions">
-                        <a href="{{ route('advertisements.create', ['step' => 1, 'catalog_id' => old('catalog_id', $catalogId), 'ad_type' => old('ad_type', $adType)]) }}" class="auth-link">
+                        <a href="{{ route('advertisements.create', ['step' => 1, 'catalog_id' => old('catalog_id', $catalogId), 'ad_type' => old('ad_type', $adType)]) }}" class="rounded-lg border border-blue-700 bg-transparent px-3.5 py-2 font-semibold text-blue-700 no-underline">
                             Назад к шагу 1
                         </a>
                         <button type="submit">Отправить объявление</button>

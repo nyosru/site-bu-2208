@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advertisement;
 use App\Models\Cat;
 use App\Support\AdvertisementCreator;
 use Illuminate\Http\RedirectResponse;
@@ -118,5 +119,14 @@ class AdvertisementController extends Controller
         return redirect()
             ->route('catalog.show', ['id' => $payload['catalog_id']])
             ->with('status', 'Объявление успешно добавлено.');
+    }
+
+    public function show(Advertisement $advertisement): View
+    {
+        $advertisement->loadMissing(['photos', 'user', 'catalog']);
+
+        return view('advertisements.show', [
+            'advertisement' => $advertisement,
+        ]);
     }
 }

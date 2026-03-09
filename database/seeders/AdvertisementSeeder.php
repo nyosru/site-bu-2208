@@ -29,7 +29,7 @@ class AdvertisementSeeder extends Seeder
                             fn (Sequence $sequence) => [
                                 'user_id' => fake()->randomElement($userIds),
                                 'catalog_id' => $catalog->id,
-                                'title' => sprintf('%s #%d', $catalog->name, $sequence->index + 1),
+                                'title' => 'товар '.sprintf('%s #%d', $catalog->name, $sequence->index + 1),
                             ]
                         )
                         ->create();

@@ -29,6 +29,3 @@ Route::get('cats', [CatalogController::class, 'index']);
 Route::get('cat/{id}', [CatalogController::class, 'show0']);
 Route::get('cat-in/{id?}', [CatalogController::class, 'showIn']);
 Route::get('cat-tree/{id}', [CatalogController::class, 'showTree']);
-
-Route::get('goodFromCat/{cat_id}', [GoodController::class, 'goodFromCat']);
-Route::get('good/{id}', [GoodController::class, 'good']);
