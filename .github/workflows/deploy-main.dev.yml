@@ -35,6 +35,7 @@ jobs:
       rebuild_needed: ${{ steps.check_commit.outputs.rebuild_needed }}
       rebuild2503master: ${{ steps.check_commit.outputs.rebuild2503master }}
       rebuildCaddy: ${{ steps.check_commit.outputs.rebuildCaddy }}
+      run_linter_test: ${{ steps.check_commit.outputs.run_linter_test }}
     steps:
       - name: Check commit message
         id: check_commit
@@ -42,9 +43,13 @@ jobs:
           check_rebuild() {
             [[ "${{ github.event.head_commit.message }}" == *"[$1+"* ]] && echo "true" || echo "false"
           }
+          check_linter_line() {
+            printf '%s\n' "${{ github.event.head_commit.message }}" | grep -Fxq "go linter test" && echo "true" || echo "false"
+          }
           echo "rebuild_needed=$(check_rebuild 'rebuild')" >> $GITHUB_OUTPUT
           echo "rebuild2503master=$(check_rebuild 'rebuild2503master')" >> $GITHUB_OUTPUT
           echo "rebuildCaddy=$(check_rebuild 'rebuildCaddy')" >> $GITHUB_OUTPUT
+          echo "run_linter_test=$(check_linter_line)" >> $GITHUB_OUTPUT
 
       - name: "Refresh git & base config"
         #if: ${{ always() }}
@@ -72,9 +77,86 @@ jobs:
             cd ${{ env.DIR }}
             make prod
 
+  deploy_npm:
+    runs-on: ubuntu-latest
+    needs: deploy_composer
+    steps:
+      - name: Conditional steps
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.VPS_IP }}
+          username: ${{ env.VPS_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
+          script: |
+            cd ${{ env.DIR }}
+            npm run build
+
+  linter_test_report:
+    runs-on: ubuntu-latest
+    needs: deploy_composer
+    if: ${{ needs.deploy.outputs.run_linter_test == 'true' }}
+    steps:
+      - name: Run make linter-test on VPS
+        id: run_linter
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.VPS_IP }}
+          username: ${{ env.VPS_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
+          script: |
+            cd ${{ env.DIR }}
+            set +e
+            make linter-test 2>&1
+            exit_code=$?
+            echo "__LINTER_EXIT_CODE:${exit_code}"
+            exit 0
+
+      - name: Prepare Telegram message
+        id: prepare_message
+        run: |
+          raw_output="$(cat <<'EOF'
+          ${{ steps.run_linter.outputs.stdout }}
+          EOF
+          )"
+          exit_code=$(printf '%s\n' "$raw_output" | sed -n 's/^__LINTER_EXIT_CODE:\([0-9]\+\)$/\1/p' | tail -n1)
+          if [ -z "$exit_code" ]; then
+            exit_code="1"
+          fi
+
+          cleaned_output=$(printf '%s\n' "$raw_output" \
+            | sed '/^__LINTER_EXIT_CODE:[0-9]\+$/d' \
+            | sed -E 's/\x1b\[[0-9;]*[A-Za-z]//g' \
+            | tail -n 80)
+
+          if [ "$exit_code" = "0" ]; then
+            status="✅ SUCCESS"
+          else
+            status="❌ FAILED"
+          fi
+
+          {
+            echo "message<<EOF"
+            echo "🧪 Linter test report"
+            echo "Repo: ${{ github.repository }}"
+            echo "By: ${{ github.actor }} (Run ID: ${{ github.run_id }})"
+            echo "Commit: ${{ github.event.head_commit.message }}"
+            echo "Result: ${status} (exit ${exit_code})"
+            echo ""
+            echo "Last output lines:"
+            echo "${cleaned_output}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Send linter result to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: 360209578, phpcat
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ steps.prepare_message.outputs.message }}
+
   sms_end:
     runs-on: ubuntu-latest
-    needs: [deploy_composer]
+    needs: [deploy, deploy_composer]
     steps:
       - name: send telega
         uses: appleboy/telegram-action@master

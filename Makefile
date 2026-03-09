@@ -7,15 +7,13 @@ seed:
 prod:
 	@echo "- - -"
 	@echo "- - -"
-	@echo "+++ prod environment started"
-	make create_web_laravel
-#	@echo "- - -"
-#	@echo "+++2 prod environment started"
-#	cp caddy/prod.Caddyfile caddy/Caddyfile
-	cp docker-compose.prod.yml docker-compose.yml
-	docker-compose down --rmi all -v
-	docker-compose up -d --build
-	make caddy_refresh_cfd_prod
+	@echo "+++ prod go go go"
+
+	docker exec 2208bu php artisan migrate
+	docker exec 2208bu php artisan cache:clear
+
+	#make linter-test
+
 	@echo "- - -"
 	@echo "чистим кещ докера"
 	make clear_docker_cache
