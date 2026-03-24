@@ -3,7 +3,7 @@ name: Deploy to VPS with Git Reset
 env:
   VPS_IP: 91.218.230.97
   VPS_USERNAME: root
-  DIR: /home/bu_site
+  DIR: /home/site-bu-2208
   GIT_BRANCH: origin/main
   GITHUB_USERNAME: nyosru
   GIT_REPO: site-bu-2208.git

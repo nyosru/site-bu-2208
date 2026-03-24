@@ -65,15 +65,15 @@
 
 </main>
 
-<footer class="flex flex-wrap flex-col sm:flex-col
+<footer class="flex flex-wrap flex-col sm:flex-row
     justify-between gap-4
     border-t border-gray-300
     bg-white
     px-4 py-3 md:px-6 md:py-3.5
     text-sm text-gray-500
     ">
-    <span>{{ date('Y') }}. Все права защищены.</span>
-    <span>Создание сайта <a href="https://php-cat.com" target="_blank" rel="noopener"
+    <span class="flex-1">{{ date('Y') }}. Все права защищены.</span>
+    <span class="flex-1">Создание сайта <a href="https://php-cat.com" target="_blank" rel="noopener"
                             class="text-gray-500 no-underline hover:underline">php-cat.com</a></span>
 </footer>
 
