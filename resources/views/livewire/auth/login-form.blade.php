@@ -1,4 +1,10 @@
 <div class="auth-card">
+    @php
+        $hasVkLoginConfig = filled(config('services.vk.client_id'))
+            && filled(config('services.vk.client_secret'))
+            && filled(config('services.vk.redirect_uri'));
+    @endphp
+
     <h2>Вход</h2>
 
     @if(session('status'))
@@ -29,6 +35,12 @@
 
         <button type="submit">Войти</button>
     </form>
+
+    @if($hasVkLoginConfig)
+        <a href="{{ route('auth.vk.redirect') }}" class="vk-login-btn">Войти через ВК</a>
+    @elseif(config('app.debug'))
+        <p class="error-text">добавте пааметры для входа через вк</p>
+    @endif
 
     <p class="muted-text">Нет аккаунта? <a href="{{ route('register') }}">Регистрация</a></p>
 </div>

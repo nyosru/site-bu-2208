@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'vk' => [
+        'group_access_token' => env('VK_GROUP_ACCESS_TOKEN'),
+        'client_id' => env('VK_CLIENT_ID'),
+        'client_secret' => env('VK_CLIENT_SECRET'),
+        'redirect_uri' => env('VK_REDIRECT_URI', rtrim((string) env('APP_URL', ''), '/').'/auth/vk/callback'),
+        'api_version' => env('VK_API_VERSION', '5.199'),
+    ],
+
 ];
