@@ -5,7 +5,7 @@ namespace App\Application\Advertisement\DTO;
 class CreateAdvertisementDto
 {
     /**
-     * @param string[] $photos
+     * @param  string[]  $photos
      */
     public function __construct(
         public readonly int $userId,
@@ -13,6 +13,5 @@ class CreateAdvertisementDto
         public readonly string $title,
         public readonly string $description,
         public readonly array $photos,
-    ) {
-    }
+    ) {}
 }

@@ -6,12 +6,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-
 /**
  * @OA\Swagger(
  *   schemes={"https"},
  *   host="api.bu72.local",
  *   basePath="/api/",
+ *
  *   @OA\Info(
  *     title="обьявления БУ72 - API",
  *     version="1.0.0"
@@ -20,12 +20,12 @@ use Illuminate\Routing\Controller as BaseController;
  */
 class Controller extends BaseController
 {
-
     /**
      * @OA\Info(
      *      version="1.0.0",
      *      title="OpenApi Documentation",
      *      description="Документация для микро сервиса",
+     *
      *      @OA\Contact(
      *          email=L5_SWAGGER_CONST_EMAIL
      *      )
@@ -45,6 +45,5 @@ class Controller extends BaseController
      *     description="Работа с каналами"
      * )
      */
-
     use AuthorizesRequests, ValidatesRequests;
 }

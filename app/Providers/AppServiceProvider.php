@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Domain\Catalog\Repositories\CatalogReadRepositoryInterface;
 use App\Domain\Advertisement\Repositories\AdvertisementRepositoryInterface;
+use App\Domain\Catalog\Repositories\CatalogReadRepositoryInterface;
 use App\Infrastructure\Persistence\Repositories\Catalog\EloquentCatalogReadRepository;
 use App\Infrastructure\Persistence\Repositories\EloquentAdvertisementRepository;
 use Illuminate\Support\ServiceProvider;

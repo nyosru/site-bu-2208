@@ -17,8 +17,7 @@ class RegisterController extends Controller
 
     public function __construct(
         private readonly AdvertisementCreator $creator,
-    ) {
-    }
+    ) {}
 
     public function create(): View
     {

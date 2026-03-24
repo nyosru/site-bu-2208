@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class MetricsController extends Controller
 {

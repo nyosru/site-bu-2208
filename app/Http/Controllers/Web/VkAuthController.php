@@ -14,13 +14,13 @@ use Throwable;
 class VkAuthController extends Controller
 {
     private const STATE_KEY = 'vk_oauth_state';
+
     private const SESSION_KEY = 'pending_advertisement';
 
     public function __construct(
         private readonly VkOAuthService $vkOAuthService,
         private readonly AdvertisementCreator $creator,
-    ) {
-    }
+    ) {}
 
     public function redirect(Request $request): RedirectResponse
     {

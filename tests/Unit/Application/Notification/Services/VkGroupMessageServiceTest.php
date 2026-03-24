@@ -21,7 +21,7 @@ class VkGroupMessageServiceTest extends TestCase
             ]),
         ]);
 
-        $service = new VkGroupMessageService();
+        $service = new VkGroupMessageService;
 
         $result = $service->sendToUser(100500, ' Тестовое сообщение ');
 
@@ -52,7 +52,7 @@ class VkGroupMessageServiceTest extends TestCase
             ]),
         ]);
 
-        $service = new VkGroupMessageService();
+        $service = new VkGroupMessageService;
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('VK API error 901: Can not send messages for users from blacklist');

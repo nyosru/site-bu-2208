@@ -70,6 +70,7 @@ class Breadcrumbs extends Component
     {
         if (request()->routeIs('catalog.show')) {
             $routeId = request()->route('id');
+
             return $routeId !== null ? (int) $routeId : null;
         }
 

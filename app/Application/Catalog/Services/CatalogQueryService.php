@@ -10,8 +10,7 @@ class CatalogQueryService
 {
     public function __construct(
         private readonly CatalogReadRepositoryInterface $catalogRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<int, array<string, mixed>>
@@ -74,5 +73,4 @@ class CatalogQueryService
             children: array_map(fn (CatalogNode $child) => $this->mapToDto($child), $node->children),
         );
     }
-
 }

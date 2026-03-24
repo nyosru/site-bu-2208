@@ -13,12 +13,17 @@ use RuntimeException;
 class VkOAuthService
 {
     private const OAUTH_AUTHORIZE_URL = 'https://oauth.vk.com/authorize';
+
     private const OAUTH_ACCESS_TOKEN_URL = 'https://oauth.vk.com/access_token';
+
     private const API_USERS_GET_URL = 'https://api.vk.com/method/users.get';
 
     private readonly string $clientId;
+
     private readonly string $clientSecret;
+
     private readonly string $redirectUri;
+
     private readonly string $apiVersion;
 
     public function __construct()

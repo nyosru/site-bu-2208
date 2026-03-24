@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\Web\AdvertisementController;
 use App\Http\Controllers\Web\CatalogPageController;
 use App\Http\Controllers\Web\RegisterController;
 use App\Http\Controllers\Web\VkAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use App\Http\Controllers\MetricsController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/metrics', MetricsController::class);
 

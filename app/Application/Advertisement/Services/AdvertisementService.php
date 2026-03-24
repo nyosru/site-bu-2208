@@ -14,8 +14,7 @@ class AdvertisementService
     public function __construct(
         private readonly AdvertisementRepositoryInterface $advertisementRepository,
         private readonly CatalogReadRepositoryInterface $catalogRepository,
-    ) {
-    }
+    ) {}
 
     public function create(CreateAdvertisementDto $dto): Advertisement
     {

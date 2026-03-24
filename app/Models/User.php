@@ -9,29 +9,27 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-
-
- /*
- * @OA\Definition(
- *  definition="Post",
- *  @OA\Property(
- *      property="id",
- *      type="integer"
- *  ),
- *  @OA\Property(
- *      property="title",
- *      type="string"
- *  ),
- *  @OA\Property(
- *      property="text",
- *      type="string"
- *  )
- * )
- */
+/*
+* @OA\Definition(
+*  definition="Post",
+*  @OA\Property(
+*      property="id",
+*      type="integer"
+*  ),
+*  @OA\Property(
+*      property="title",
+*      type="string"
+*  ),
+*  @OA\Property(
+*      property="text",
+*      type="string"
+*  )
+* )
+*/
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -66,8 +64,6 @@ class User extends Authenticatable
         'vk_id' => 'integer',
     ];
 
-
-
     /*
      * @OA\Property(
      *     title="ID",
@@ -79,6 +75,7 @@ class User extends Authenticatable
      * @var bigInteger
      */
     private $id;
+
     /*
      * @OA\Property(
      *      title="Alias",
@@ -89,6 +86,7 @@ class User extends Authenticatable
      * @var string
      */
     private $alias;
+
     /*
      * @OA\Property(
      *      title="Name",
@@ -99,6 +97,7 @@ class User extends Authenticatable
      * @var string
      */
     private $name;
+
     /*
      * @OA\Property(
      *      title="Is Active",
@@ -109,6 +108,7 @@ class User extends Authenticatable
      * @var boolean
      */
     private $is_active;
+
     /*
      * @OA\Property(
      *      title="Default Driver Alias",
@@ -119,6 +119,7 @@ class User extends Authenticatable
      * @var string
      */
     private $default_driver_alias;
+
     /*
      * @OA\Property(
      *     title="Created at",

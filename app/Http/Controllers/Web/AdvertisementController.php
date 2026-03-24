@@ -17,8 +17,7 @@ class AdvertisementController extends Controller
 
     public function __construct(
         private readonly AdvertisementCreator $creator,
-    ) {
-    }
+    ) {}
 
     public function create(Request $request): View
     {
@@ -95,7 +94,7 @@ class AdvertisementController extends Controller
         $photoPaths = [];
         foreach ($request->file('photos', []) as $photo) {
             $path = $photo->store('advertisements', 'public');
-            $photoPaths[] = '/storage/' . ltrim($path, '/');
+            $photoPaths[] = '/storage/'.ltrim($path, '/');
         }
 
         $payload = [

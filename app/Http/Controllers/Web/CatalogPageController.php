@@ -11,9 +11,7 @@ class CatalogPageController extends Controller
 {
     public function __construct(
         private readonly CatalogQueryService $catalogQueryService,
-    )
-    {
-    }
+    ) {}
 
     public function show(int $id): View
     {

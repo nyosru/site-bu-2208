@@ -5,7 +5,7 @@ namespace App\Domain\Advertisement\Entities;
 class Advertisement
 {
     /**
-     * @param AdvertisementPhoto[] $photos
+     * @param  AdvertisementPhoto[]  $photos
      */
     public function __construct(
         public readonly ?int $id,
@@ -16,6 +16,5 @@ class Advertisement
         public readonly array $photos,
         public readonly ?\DateTimeImmutable $createdAt = null,
         public readonly ?\DateTimeImmutable $updatedAt = null,
-    ) {
-    }
+    ) {}
 }

@@ -5,15 +5,14 @@ namespace App\Application\Catalog\DTO;
 class CatalogNodeDto
 {
     /**
-     * @param CatalogNodeDto[] $children
+     * @param  CatalogNodeDto[]  $children
      */
     public function __construct(
         public readonly int $id,
         public readonly string $name,
         public readonly ?int $parentId,
         public readonly array $children = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{id:int,name:string,cat_up_id:int|null,children:array<int,mixed>}
