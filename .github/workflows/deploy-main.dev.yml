@@ -89,7 +89,7 @@ jobs:
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
           script: |
-            docker exec -w ${{ env.DIR_LOCAL }} 2208bu_site npm i && npm run build
+            docker exec -w ${{ env.DIR_LOCAL }} 2208bu_site npm run build
 #             cd ${{ env.DIR }}
 
   linter_test_report:
