@@ -9,8 +9,8 @@ prod:
 	@echo "- - -"
 	@echo "+++ prod go go go"
 
-	docker exec 2208bu php artisan migrate
-	docker exec 2208bu php artisan cache:clear
+	docker exec 2208bu_site php artisan migrate
+	docker exec 2208bu_site php artisan cache:clear
 
 	#make linter-test
 
