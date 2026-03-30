@@ -178,8 +178,8 @@ jobs:
             -d '{
               "group_name": "tech",
               "user_id": 5903492,
-              "message": "🍀🍀🍀 Deployment Report '"${{ github.repository }}"' \
-              Commit: ${{ github.event.head_commit.message || '-' }} \
+              "message": "🍀🍀🍀 Deployment Report '"${{ github.repository }}"'
+              Commit: ${{ github.event.head_commit.message || '-' }}
               🏻‍💻 ${{ github.actor }} (${{ github.run_id }}) "
             }'
 
