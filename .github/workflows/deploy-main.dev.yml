@@ -28,7 +28,7 @@ jobs:
             -d '{
               "group_name": "tech",
               "user_id": 5903492,
-              "message": "🚀🚀🚀 Старт деплоя '"${{ github.repository }}"' \n 💻 ${{ github.actor }} (${{ github.run_id }}) \n 📝 ${{ github.event.head_commit.message }} "
+              "message": "🚀🚀🚀 ${{ github.repository }} Старт деплоя \n 💻 ${{ github.actor }} (${{ github.run_id }}) \n 📝 ${{ github.event.head_commit.message }} "
             }'
 #      - name: Send deployment start notification
 #        uses: appleboy/telegram-action@master
@@ -177,7 +177,7 @@ jobs:
             -d '{
               "group_name": "tech",
               "user_id": 5903492,
-              "message": "🍀🍀🍀 Deployment Report - finished '"${{ github.repository }}"' ‍💻 ${{ github.ref_name }} ++ ${{ github.actor }} (${{ github.run_id }}) "
+              "message": "🍀🍀🍀 ${{ github.repository }} Deployment finished \n ‍💻 ${{ github.ref_name }} \n ++ ${{ github.actor }} (${{ github.run_id }}) "
             }'
 
 #      - name: send telega
