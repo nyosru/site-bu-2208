@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdvertisementTaskController;
 use App\Http\Controllers\CatalogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,4 @@ Route::get('cats', [CatalogController::class, 'index']);
 Route::get('cat/{id}', [CatalogController::class, 'show0']);
 Route::get('cat-in/{id?}', [CatalogController::class, 'showIn']);
 Route::get('cat-tree/{id}', [CatalogController::class, 'showTree']);
+Route::post('advertisement-tasks', [AdvertisementTaskController::class, 'store']);

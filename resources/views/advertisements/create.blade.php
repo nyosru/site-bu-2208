@@ -43,6 +43,10 @@
                     <input type="hidden" name="catalog_id" value="{{ old('catalog_id', $catalogId) }}">
                     <input type="hidden" name="ad_type" value="{{ old('ad_type', $adType) }}">
 
+                    @error('form')
+                    <small class="error-text">{{ $message }}</small>
+                    @enderror
+
                     <label>
                         <span>Название</span>
                         <input type="text" name="title" value="{{ old('title') }}" maxlength="255" required>

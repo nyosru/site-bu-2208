@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Application\Auth\Services\VkOAuthService;
 use App\Http\Controllers\Controller;
-use App\Support\AdvertisementCreator;
+use App\Support\AdvertisementTaskProducerInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,7 @@ class VkAuthController extends Controller
 
     public function __construct(
         private readonly VkOAuthService $vkOAuthService,
-        private readonly AdvertisementCreator $creator,
+        private readonly AdvertisementTaskProducerInterface $taskProducer,
     ) {}
 
     public function redirect(Request $request): RedirectResponse
@@ -63,11 +63,19 @@ class VkAuthController extends Controller
 
         $pendingAdvertisement = $request->session()->pull(self::SESSION_KEY);
         if (is_array($pendingAdvertisement)) {
-            $this->creator->create($user->id, $pendingAdvertisement);
+            try {
+                $taskId = $this->taskProducer->dispatchCreateTask($user->id, $pendingAdvertisement);
+            } catch (Throwable $e) {
+                Log::warning('Failed to dispatch pending advertisement task after VK auth: '.$e->getMessage());
+
+                return redirect()
+                    ->route('catalog.show', ['id' => $pendingAdvertisement['catalog_id']])
+                    ->with('status', 'Вход через VK выполнен, но отправить объявление в обработку не удалось. Повторите отправку.');
+            }
 
             return redirect()
                 ->route('catalog.show', ['id' => $pendingAdvertisement['catalog_id']])
-                ->with('status', 'Вход через VK выполнен, объявление добавлено.');
+                ->with('status', "Вход через VK выполнен, задание на создание объявления принято. ID: {$taskId}");
         }
 
         return redirect()->route('home')->with('status', 'Вы вошли через VK.');

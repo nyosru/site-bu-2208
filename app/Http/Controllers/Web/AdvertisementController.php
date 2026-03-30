@@ -5,18 +5,20 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Models\Cat;
-use App\Support\AdvertisementCreator;
+use App\Support\AdvertisementTaskProducerInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
+use Throwable;
 
 class AdvertisementController extends Controller
 {
     private const SESSION_KEY = 'pending_advertisement';
 
     public function __construct(
-        private readonly AdvertisementCreator $creator,
+        private readonly AdvertisementTaskProducerInterface $taskProducer,
     ) {}
 
     public function create(Request $request): View
@@ -113,11 +115,27 @@ class AdvertisementController extends Controller
             return redirect()->route('register')->with('status', 'Чтобы разместить объявление, зарегистрируйтесь. После регистрации объявление будет добавлено автоматически.');
         }
 
-        $this->creator->create($user->id, $payload);
+        try {
+            $taskId = $this->taskProducer->dispatchCreateTask($user->id, $payload);
+        } catch (Throwable $e) {
+            Log::error('Failed to enqueue advertisement create task from web form.', [
+                'user_id' => $user->id,
+                'catalog_id' => $payload['catalog_id'],
+                'error' => $e->getMessage(),
+            ]);
+
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['form' => 'Не удалось отправить объявление в обработку. Повторите попытку.']);
+        }
 
         return redirect()
             ->route('catalog.show', ['id' => $payload['catalog_id']])
-            ->with('status', 'Объявление успешно добавлено.');
+//            ->with('status', "Обьявление добавлено, Задание принято в обработку. ID: {$taskId}")
+//            ->with('status', "Добавляем обьявление, скоро появится. <sup>ID: {$taskId}</sup>")
+            ->with('status', "Добавляем объявление, скоро появится.")
+            ;
     }
 
     public function show(Advertisement $advertisement): View
