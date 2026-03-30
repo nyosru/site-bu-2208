@@ -170,14 +170,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy, deploy_composer]
     steps:
-      - name: sms_vk_start
+      - name: sms_vk
         run: |
           curl -X POST "https://api.php-cat.com/api/vk/send" \
             -H "Content-Type: application/json" \
             -d '{
               "group_name": "tech",
               "user_id": 5903492,
-              "message": "🍀🍀🍀 ${{ github.repository }} Deployment finished \n ‍💻 ${{ github.ref_name }} \n ++ ${{ github.actor }} (${{ github.run_id }}) "
+              "message": "🍀🍀🍀 ${{ github.repository }} Deployment finished \n ‍💻 ${{ github.ref_name }} ++ ${{ github.actor }} (${{ github.run_id }}) "
             }'
 
 #      - name: send telega
