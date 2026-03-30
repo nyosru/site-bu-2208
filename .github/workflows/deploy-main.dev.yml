@@ -20,6 +20,15 @@ jobs:
   sms_start:
     runs-on: ubuntu-latest
     steps:
+      - name: sms_vk_start
+        run: |
+          curl -X POST "https://api.php-cat.com/api/vk/send" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "group_name": "pm",
+              "user_id": 5903492,
+              "message": "Старт деплоя '"${{ github.repository }}"' "
+            }'
       - name: Send deployment start notification
         uses: appleboy/telegram-action@master
         with:
