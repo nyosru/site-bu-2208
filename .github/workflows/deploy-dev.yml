@@ -3,16 +3,17 @@ name: Deploy to VPS with Git Reset
 env:
   VPS_IP: 91.218.230.97
   VPS_USERNAME: root
-  DIR: /home/site-bu-2208
-  DIR_LOCAL: /home/2208bu
-  GIT_BRANCH: origin/main
+  DIR: /home/site-bu-2208_dev
+  DIR_LOCAL: /home/2208bu_dev
+  GIT_BRANCH: origin/dev
   GITHUB_USERNAME: nyosru
   GIT_REPO: site-bu-2208.git
+  DOCKER_CONTAINER: 2208bu_site_dev
 
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
 
@@ -97,7 +98,7 @@ jobs:
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
           script: |
-            docker exec -w ${{ env.DIR_LOCAL }} 2208bu_site npm run build
+            docker exec -w ${{ env.DIR_LOCAL }} ${{ env.DOCKER_CONTAINER }} npm run build
 #             cd ${{ env.DIR }}
 
   linter_test_report:
@@ -113,7 +114,7 @@ jobs:
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY_DOCKER24 }}
           script: |
-            docker exec -w ${{ env.DIR_LOCAL }} 2208bu_site make linter-test
+            docker exec -w ${{ env.DIR_LOCAL }} ${{ env.DOCKER_CONTAINER }} make linter-test
 #            cd ${{ env.DIR }}
 #            set +e
 #            make linter-test 2>&1
