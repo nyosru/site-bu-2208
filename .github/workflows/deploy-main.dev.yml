@@ -28,9 +28,7 @@ jobs:
             -d '{
               "group_name": "tech",
               "user_id": 5903492,
-              "message": "🚀🚀🚀 Старт деплоя '"${{ github.repository }}"' \
-              🏻‍💻 ${{ github.actor }} (${{ github.run_id }}) \
-              📝 ${{ github.event.head_commit.message }} "
+              "message": "🚀🚀🚀 Старт деплоя '"${{ github.repository }}"' ‍💻 ${{ github.actor }} (${{ github.run_id }}) 📝 ${{ github.event.head_commit.message }} "
             }'
 #      - name: Send deployment start notification
 #        uses: appleboy/telegram-action@master
@@ -179,21 +177,21 @@ jobs:
             -d '{
               "group_name": "tech",
               "user_id": 5903492,
-              "message": "🍀🍀🍀 Deployment Report - finished '"${{ github.repository }}"' ‍💻 ${{ github.branch }} ${{ github.actor }} (${{ github.run_id }}) "
+              "message": "🍀🍀🍀 Deployment Report - finished '"${{ github.repository }}"' ‍💻 ${{ github.ref_name }} ++ ${{ github.actor }} (${{ github.run_id }}) "
             }'
 
-      - name: send telega
-        uses: appleboy/telegram-action@master
-        with:
-          to: 360209578, phpcat,
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            🍀🍀🍀 Deployment Report
-            Repo: ${{ github.repository }}
-            Commit: ${{ github.event.head_commit.message || '-' }}
-            By: ${{ github.actor }} (Run ID: ${{ github.run_id }})
-
-            🔧 Rebuild Needed: ${{ needs.deploy.outputs.rebuild_needed || '--' }}
-            🖥️ 2503master Rebuild: ${{ needs.deploy.outputs.rebuild2503master || '--' }}
-            🔐 Caddy Update: ${{ needs.deploy.outputs.rebuildCaddy || '--' }}
-            if [ "${{ needs.deploy.outputs.rebuildCaddy }}" == 'true' ]; then rebuildCaddy+  fi
+#      - name: send telega
+#        uses: appleboy/telegram-action@master
+#        with:
+#          to: 360209578, phpcat,
+#          token: ${{ secrets.TELEGRAM_TOKEN }}
+#          message: |
+#            🍀🍀🍀 Deployment Report
+#            Repo: ${{ github.repository }}
+#            Commit: ${{ github.event.head_commit.message || '-' }}
+#            By: ${{ github.actor }} (Run ID: ${{ github.run_id }})
+#
+#            🔧 Rebuild Needed: ${{ needs.deploy.outputs.rebuild_needed || '--' }}
+#            🖥️ 2503master Rebuild: ${{ needs.deploy.outputs.rebuild2503master || '--' }}
+#            🔐 Caddy Update: ${{ needs.deploy.outputs.rebuildCaddy || '--' }}
+#            if [ "${{ needs.deploy.outputs.rebuildCaddy }}" == 'true' ]; then rebuildCaddy+  fi
